@@ -12,16 +12,21 @@
         "babel-polyfill": "^6.26.0",
         "babel-preset-env": "^1.6.1",
         "babel-preset-react": "^6.24.1",
+        "chai": "^4.1.2",
         "clean-webpack-plugin": "^0.1.18",
         "cross-env": "^5.1.3",
         "css-loader": "^0.28.9",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^1.1.6",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^2.30.1",
         "image-webpack-loader": "^4.0.0",
+        "jsdom": "^11.6.2",
         "less": "^2.7.3",
         "less-loader": "^4.0.5",
+        "mocha": "^5.0.0",
         "style-loader": "^0.19.1",
         "webpack": "^3.10.0",
         "webpack-dev-server": "^2.11.1",
@@ -29,7 +34,14 @@
     },
     "scripts": {
         "dev": "webpack-dev-server --config webpack.dev.js",
-        "prod": "cross-env NODE_ENV=production webpack -p --config webpack.prod.js"
+        "prod": "cross-env NODE_ENV=production webpack -p --config webpack.prod.js",
+        "test": "mocha --require babel-core/register --require ./test/helper/setup.js"
     },
-    "dependencies": {}
+    "dependencies": {
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-redux": "^5.0.6",
+        "react-router": "^4.2.0",
+        "redux": "^3.7.2"
+    }
 }
