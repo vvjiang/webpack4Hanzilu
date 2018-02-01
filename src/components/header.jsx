@@ -3,7 +3,7 @@ import React from 'react'
 const Header=(props)=>{
   return (
     <div>
-      <span style={{float:"left"}} className="header-left-title">
+      <span onClick={props.onLeftClick} style={{float:"left"}} className="header-left-title">
         {props.leftTitle}
       </span>
       <span style={{float:"right"}} className="header-right-title">
