@@ -1,4 +1,5 @@
-# webpack4Hanzilu
+# webpack4Hanzilu #
+
 一个自用的webpack脚手架
 
 功能：
@@ -15,4 +16,4 @@
 - 给文件加上hash值
 - 生成文件前清空输出文件夹
 - source-map定位源文件
-- 单元测试：mocha,chai,enzyme,sinon,jsdom
+- 单元测试：jest,enzyme,sinon
