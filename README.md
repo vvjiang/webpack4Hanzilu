@@ -17,3 +17,4 @@
 - 生成文件前清空输出文件夹
 - source-map定位源文件
 - 单元测试：jest,enzyme,sinon
+- 加入eslint检测和editorconfig配置
