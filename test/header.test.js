@@ -14,21 +14,8 @@ test('Header组件中各位置的文本符合预期输入', function () {
         rightTitle = '右边主题',
         leftClick = sinon.spy()
 
-    let app = shallow(< Header title={
-        title
-    }
-        leftTitle={
-            leftTitle
-        }
-        rightTitle={
-            rightTitle
-        }
-        onLeftClick={
-            leftClick
-        } />);
-    app
-        .find('span.header-left-title')
-        .simulate("click")
+    let app = shallow(< Header title={title} leftTitle={leftTitle} rightTitle={rightTitle} onLeftClick={leftClick} />);
+    app.find('span.header-left-title').simulate("click")
 
     expect(leftClick.calledOnce)
 
