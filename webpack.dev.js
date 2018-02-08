@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { theme } = require('./package.json');
 
 module.exports = merge(common, {
   output: {
@@ -30,7 +31,9 @@ module.exports = merge(common, {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader?sourceMap', 'less-loader?sourceMap'],
+        use: ['css-loader?sourceMap',
+          { loader: 'less-loader', options: { modifyVars: theme } },
+        ],
       }),
     },
     ],

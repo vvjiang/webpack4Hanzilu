@@ -10,6 +10,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
+    "babel-plugin-import": "^1.6.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -40,6 +41,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "ant-mobile": "0.0.0",
+    "antd-mobile": "^2.1.6",
     "clean-webpack-plugin": "^0.1.18",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",
@@ -47,9 +50,13 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "webpack": "^3.10.0",
     "webpack-merge": "^4.1.1"
+  },
+  "theme": {
+    "brand-primary": "red",
+    "color-text-base": "#333"
   }
 }
