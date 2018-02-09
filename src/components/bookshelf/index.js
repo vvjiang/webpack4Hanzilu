@@ -4,8 +4,10 @@ import './index.css';
 
 const { Item } = List;
 const { Brief } = Item;
-
-const Bookshelf = () => {
+/**
+ * 书架组件
+ */
+const Bookshelf = (props) => {
   const notice = () => {
     return (
       <NoticeBar marqueeProps={{ loop: true, style: { padding: '0 7.5px' } }}>
@@ -13,20 +15,17 @@ const Bookshelf = () => {
       </NoticeBar>
     );
   };
+  const itemList = props.dataSource.map((item) => {
+    return (
+      <Item key={item.id} extra={<Badge text="更" />} thumb="https://cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" multipleLine>
+        {item.title}
+        <Brief>{item.description}</Brief>
+      </Item>
+    );
+  });
   return (
     <List renderHeader={notice} className="book-shelf">
-      <Item extra={<Badge text="更" />} thumb="https://cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" multipleLine>
-        TitlTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitlee
-        <Brief>asdasdasdddddddddddddddd哈哈哈ddddddddddddddddddddddddddddddddddddd
-        dd阿萨德ddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        </Brief>
-      </Item>
-      <Item thumb="https://cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" >
-        TitlTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitleTitlee
-        <Brief>asdasdasdddddddddddddddd哈哈哈ddddddddddddddddddddddddd
-        ddddddddddddddd阿萨德dddddddddddddddddddddddddddddddddddddddddddddddddddd
-        </Brief>
-      </Item>
+      {itemList}
     </List>
   );
 };
