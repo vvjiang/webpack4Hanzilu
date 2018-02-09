@@ -27,6 +27,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.6",
     "html-loader": "^0.5.5",
+    "identity-obj-proxy": "^3.0.0",
     "image-webpack-loader": "^4.0.0",
     "jest": "^22.1.4",
     "less": "^2.7.3",
@@ -38,7 +39,7 @@
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "cross-env NODE_ENV=production webpack -p --config webpack.prod.js",
     "build": "cross-env webpack -p --config webpack.prod.js",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "ant-mobile": "0.0.0",
@@ -58,5 +59,11 @@
   "theme": {
     "brand-primary": "red",
     "color-text-base": "#333"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/config/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }
