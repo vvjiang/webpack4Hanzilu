@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from './config/Enzyme.config';
-import Bookshelf from '../src/components/bookshelf';
+import Bookshelf from '../src/components/pageMain/components/bookshelf';
 
 const { mount } = Enzyme;
 

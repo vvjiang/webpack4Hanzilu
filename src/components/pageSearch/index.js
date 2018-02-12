@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from '../footer';
-import FullscreenContainer from '../fullscreenContainer';
+import Footer from '../common/footer';
+import FullscreenContainer from '../common/fullscreenContainer';
 
 /**
  * 首页
