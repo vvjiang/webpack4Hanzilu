@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from './config/Enzyme.config';
-import Footer from '../src/components/footer';
+import Footer from '../src/components/common/footer';
 
 const { shallow } = Enzyme;
 
