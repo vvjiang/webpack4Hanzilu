@@ -20,3 +20,5 @@
 - 集成React的UI组件库antd-mobile
 - 集成字体图标库Font Awesome
 - 单元测试采用jest,enzyme
+- json-server模拟服务器返回数据
+- axios进行ajax请求
