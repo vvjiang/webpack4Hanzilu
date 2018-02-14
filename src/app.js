@@ -8,6 +8,7 @@ import PageSearch from './components/pageSearch';
 import reducer from './reducers';
 import './app.less';
 
+
 const store = createStore(reducer);
 
 const App = () => (

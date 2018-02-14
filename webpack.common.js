@@ -34,8 +34,10 @@ module.exports = {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['env', 'react', 'stage-3'],
-          plugins: [['import', { libraryName: 'antd-mobile', style: 'css' }]], // `style: true` 会加载 less 文件
+          presets: ['react', 'env', 'stage-0', 'stage-3'],
+          plugins: [
+            ['import', { libraryName: 'antd-mobile', style: 'css' }], // `style: true` 会加载 less 文件
+          ],
         },
       },
     },
