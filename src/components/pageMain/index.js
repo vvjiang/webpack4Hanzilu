@@ -4,15 +4,14 @@ import Footer from '../common/footer';
 import FullscreenContainer from '../common/fullscreenContainer';
 import MainHeader from './components/mainHeader';
 import Bookshelf from './components/bookshelf';
-import actions from './actions';
+import { getBookList, deleteBook } from './actions';
 
-const { bookDelete, bookListGet } = actions;
 /**
  * 首页
  */
 class PageMain extends React.Component {
   componentDidMount() {
-    this.props.bookListGet();
+    this.props.getBookList();
   }
 
   render() {
@@ -32,7 +31,4 @@ export default connect((state) => {
   return {
     bookList: state.pageMain.bookList,
   };
-}, {
-    bookDelete,
-    bookListGet,
-  })(PageMain);
+}, { getBookList, deleteBook })(PageMain);

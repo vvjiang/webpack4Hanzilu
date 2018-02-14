@@ -1,13 +1,8 @@
-const BOOK_LIST_GET = 'BOOK_LIST_GET';
-const BOOK_DELETE = 'BOOK_DELETE';
-
-export default {
-  /**
+/**
    *  获取书籍列表
    */
-  BOOK_LIST_GET,
-  /**
+export const LIST_BOOK = 'LIST_BOOK';
+/**
    *  删除书籍
    */
-  BOOK_DELETE,
-};
+export const DELETE_BOOK = 'DELETE_BOOK';

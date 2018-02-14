@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import actionTypes from './actionTypes';
+import * as T from './actionTypes';
 
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const pageMainReducer = handleActions({
-  [actionTypes.BOOK_LIST_GET]:
+  [T.LIST_BOOK]:
     {
       next(state, action) {
         return {
@@ -19,7 +19,7 @@ const pageMainReducer = handleActions({
         return state;
       },
     },
-  [actionTypes.BOOK_DELETE]: (state, { payload: { id } }) => {
+  [T.DELETE_BOOK]: (state, { payload: { id } }) => {
     return {
       ...state,
       bookList: state.bookList.filter(l => l.id !== id),
