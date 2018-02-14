@@ -6,12 +6,13 @@ import MainHeader from './components/mainHeader';
 import Bookshelf from './components/bookshelf';
 import actions from './actions';
 
+const { bookDelete, bookListGet } = actions;
 /**
  * 首页
  */
 class PageMain extends React.Component {
   componentDidMount() {
-    this.props.getBookList();
+    this.props.bookListGet();
   }
 
   render() {
@@ -31,10 +32,7 @@ export default connect((state) => {
   return {
     bookList: state.pageMain.bookList,
   };
-}, (dispath) => {
-  return {
-    getBookList: () => {
-      dispath(actions.getBookList());
-    },
-  };
-})(PageMain);
+}, {
+    bookDelete,
+    bookListGet,
+  })(PageMain);
