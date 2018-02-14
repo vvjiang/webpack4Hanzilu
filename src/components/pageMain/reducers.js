@@ -1,25 +1,30 @@
+import { handleActions } from 'redux-actions';
 import actionTypes from './actionTypes';
 
+
 const initialState = {
-  bookList: [{
-    id: '1',
-    title: '123',
-    description: '123',
-  }, {
-    id: '2',
-    title: '234',
-    description: '234',
-  }],
+  bookList: [],
 };
 
-const pageMainReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.BOOK_LIST_GET:
-      return {
-        ...state,
-      };
-    default:
-      return state;
-  }
-};
+const pageMainReducer = handleActions({
+  [actionTypes.BOOK_LIST_GET]:
+    {
+      next(state, action) {
+        return {
+          ...state,
+          bookList: action.payload,
+        };
+      },
+      throw(state) {
+        return state;
+      },
+    },
+  [actionTypes.BOOK_DELETE]: (state, { payload: { id } }) => {
+    return {
+      ...state,
+      bookList: state.bookList.filter(l => l.id !== id),
+    };
+  },
+}, initialState);
+
 export default pageMainReducer;
