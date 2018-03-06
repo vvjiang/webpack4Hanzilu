@@ -1,14 +1,14 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { NavBar, Icon, Tabs } from 'antd-mobile';
+import { NavBar, Icon } from 'antd-mobile';
 import { hideReaderHandle } from '../actions';
 /**
  * 阅读控制界面
  */
 class ReaderHandle extends React.Component {
-  state = {
-    hidden: true,
+  componentWillUnmount() {
+    this.props.hideReaderHandle();
   }
   /**
    * 返回首页
@@ -16,7 +16,13 @@ class ReaderHandle extends React.Component {
   gobackToHome = () => {
     this.props.history.push('/');
   }
-
+  /**
+   * 隐藏阅读操作页
+   */
+  hideReaderHandle = (event) => {
+    this.props.hideReaderHandle();
+    event.stopPropagation();
+  }
   render() {
     const styles = {
       position: 'fixed',
@@ -25,15 +31,10 @@ class ReaderHandle extends React.Component {
       zIndex: 1,
       top: 0,
     };
-    const tabs = [
-      { title: 'First Tab' },
-      { title: 'Second Tab' },
-      { title: 'Third Tab' },
-    ];
     return (
       <div style={styles} className={this.props.hidden ? 'hide' : null}>
         <NavBar mode="light" icon={<Icon type="left" />} onLeftClick={this.gobackToHome} />
-        <div style={{ height: 'calc(100vh - 100px)' }} onClick={this.} >
+        <div role="button" style={{ height: 'calc(100vh - 100px)' }} onClick={this.hideReaderHandle} >
           测试demo
         </div>
         <div>
@@ -46,13 +47,13 @@ class ReaderHandle extends React.Component {
   }
 }
 
-export default withRouter(
-  connect(
-    (state) => {
-      hidden: state.pageReader.hidden
-    },
-    {
-      hideReaderHandle
-    }
-  )(ReaderHandle)
-);
+export default withRouter(connect(
+  (state) => {
+    return {
+      hidden: state.pageReader.isHiddenReaderHandle,
+    };
+  },
+  {
+    hideReaderHandle,
+  },
+)(ReaderHandle));
