@@ -1,12 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { showReaderHandle, hideReaderHandle } from './actions';
 import ReaderHandle from './readerHandle';
 /**
  * 阅读页面
  */
 class PageReader extends React.Component {
   state = {
-    isHiddenReaderHandle: true,
     currentContent: '这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，',
   }
   /**
@@ -18,17 +18,24 @@ class PageReader extends React.Component {
   /**
    * 展开阅读操作界面
    */
-  clickOpenReaderHandle = () => {
-    this.setState({ isHiddenReaderHandle: false });
+  clickOpenReaderHandle = (event) => {
+    this.props.showReaderHandle();
+    event.stopPropagation();
   }
   render() {
     return (
       <div style={{ height: '100vh', width: '100vw' }} role="button" onClick={this.clickOpenReaderHandle}>
         {this.state.currentContent}
-        <ReaderHandle hidden={this.state.isHiddenReaderHandle} />
+        <ReaderHandle />
       </div>
     );
   }
 }
 
-export default PageReader;
+export default connect(
+  null,
+  {
+    showReaderHandle,
+    hideReaderHandle
+  },
+)(PageReader);
