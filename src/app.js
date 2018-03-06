@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PageMain from './components/pageMain';
 import PageSearch from './components/pageSearch';
+import PageReader from './components/pageReader';
 import reducer from './reducers';
 import './app.less';
 
@@ -17,6 +18,7 @@ const App = () => (
       <div>
         <Route exact path="/" component={PageMain} />
         <Route path="/search" component={PageSearch} />
+        <Route path="/reader" component={PageReader} />
       </div>
     </Router>
   </Provider>

@@ -31,11 +31,17 @@ class PageSearch extends React.Component {
       });
     });
   }
+  /**
+   * 返回首页
+   */
+  backToHome = () => {
+    this.props.history.goBack();
+  }
 
   render() {
     return (
       <div>
-        <SearchHeader />
+        <SearchHeader onClickLeft={this.backToHome} />
         <FullscreenContainer minusHeight={100}>
           <SearchBar placeholder="请输入书籍名称或作者名" onSubmit={this.serachBook} />
           <BookList dataSource={this.state.bookList} />
