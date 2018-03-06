@@ -19,10 +19,10 @@ const pageMainReducer = handleActions({
         return state;
       },
     },
-  [T.DELETE_BOOK]: (state, { payload: { id } }) => {
+  [T.DELETE_BOOK]: (state, { payload: { bookCode } }) => {
     return {
       ...state,
-      bookList: state.bookList.filter(l => l.id !== id),
+      bookList: state.bookList.filter(l => l.id !== bookCode),
     };
   },
 }, initialState);

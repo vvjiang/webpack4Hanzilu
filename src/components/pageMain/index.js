@@ -13,13 +13,12 @@ class PageMain extends React.Component {
   componentDidMount() {
     this.props.getBookList();
   }
-
   render() {
     return (
       <div>
         <MainHeader title="123" onClickHome={() => { }} />
         <FullscreenContainer minusHeight={100}>
-          <Bookshelf dataSource={this.props.bookList} />
+          <Bookshelf onRead={this.gotoBookReader} dataSource={this.props.bookList} />
         </FullscreenContainer>
         <Footer title="韩子卢" />
       </div>

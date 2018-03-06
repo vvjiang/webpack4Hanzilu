@@ -1,0 +1,1 @@
+export const HIDE_READER_HANDLE = 'HIDE_READER_HANDLE';

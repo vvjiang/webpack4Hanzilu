@@ -5,22 +5,14 @@ import * as T from './actionTypes';
  * 获取书籍信息
  */
 export const getBookList = createAction(T.LIST_BOOK, () => {
-  const bookList = [{
-    id: '1',
-    title: '123',
-    description: '123',
-  }, {
-    id: '2',
-    title: '234',
-    description: '234',
-  }];
-  return bookList;
+  const data = Object.entries(localStorage);
+  return data.filter(l => l[0].slice(0, 4) === 'book').map(l => JSON.parse(l[1]));
 });
 
 /**
  * 删除书籍
  */
-export const deleteBook = createAction(T.DELETE_BOOK, (id) => {
-  console.info(`删除id为${id}的Book`);
-  return { id };
+export const deleteBook = createAction(T.DELETE_BOOK, (bookCode) => {
+  localStorage.removeItem(`book${bookCode}`);
+  return { bookCode };
 });
