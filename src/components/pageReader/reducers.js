@@ -16,6 +16,12 @@ const readerHandleReducer = handleActions({
       isHiddenReaderHandle: true,
     };
   },
+  [T.SHOW_READER_HANDLE]: (state) => {
+    return {
+      ...state,
+      isHiddenReaderHandle: false,
+    };
+  },
 }, initialState);
 
 export default readerHandleReducer;
