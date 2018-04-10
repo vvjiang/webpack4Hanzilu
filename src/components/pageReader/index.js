@@ -34,7 +34,7 @@ class PageReader extends React.Component {
       readStyle.backgroundColor = '#333';
     }
     return (
-      <div style={{ height: '100vh', width: '100vw', ...readStyle }} role="button" onClick={this.clickOpenReaderHandle}>
+      <div style={{ minHeight: '100vh', width: '100vw', ...readStyle }} role="button" onClick={this.clickOpenReaderHandle}>
         {this.state.currentContent}
         <ReaderHandle />
         <Catelog />
