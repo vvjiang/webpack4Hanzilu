@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Modal } from 'antd-mobile';
 import styles from './index.css';
 import { showCatelog, toggleNight } from '../../actions';
 

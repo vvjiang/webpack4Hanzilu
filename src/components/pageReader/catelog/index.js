@@ -10,10 +10,6 @@ class Catelog extends React.Component {
   state = {
     refreshing: false,
   }
-
-  componentWillUnmount() {
-    this.props.hideReaderHandle();
-  }
   /**
    * 隐藏目录
    */

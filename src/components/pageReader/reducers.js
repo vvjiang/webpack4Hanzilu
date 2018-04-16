@@ -12,6 +12,10 @@ const initialState = {
    */
   isHiddenCatelog: true,
   /**
+   * 是否隐藏阅读设置
+   */
+  isHiddenReaderConfig: true,
+  /**
    * 是否夜间
    */
   isNight: false,
