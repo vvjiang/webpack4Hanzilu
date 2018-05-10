@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { showReaderHandle, hideReaderHandle } from './actions';
 import ReaderHandle from './readerHandle';
 import Catelog from './catelog';
+import ReaderConfig from './readerConfig';
 /**
  * 阅读页面
  */
@@ -27,17 +28,19 @@ class PageReader extends React.Component {
   render() {
     const readStyle = {
       color: '#333',
-      backgroundColor: '#fff',
+      backgroundColor: this.props.bgColor,
     };
     if (this.props.isNight) {
       readStyle.color = '#fff';
       readStyle.backgroundColor = '#333';
     }
+
     return (
       <div style={{ minHeight: '100vh', width: '100vw', ...readStyle }} role="button" onClick={this.clickOpenReaderHandle}>
         {this.state.currentContent}
         <ReaderHandle />
         <Catelog />
+        <ReaderConfig />
       </div>
     );
   }
@@ -46,6 +49,7 @@ class PageReader extends React.Component {
 export default withRouter(connect((state) => {
   return {
     isNight: state.pageReader.isNight,
+    bgColor: state.pageReader.bgColor,
   };
 }, {
   showReaderHandle,

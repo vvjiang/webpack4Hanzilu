@@ -19,6 +19,10 @@ const initialState = {
    * 是否夜间
    */
   isNight: false,
+  /**
+   * 背景色
+   */
+  bgColor: '#fff'
 };
 
 const readerHandleReducer = handleActions({
@@ -27,6 +31,7 @@ const readerHandleReducer = handleActions({
     return {
       ...state,
       isHiddenReaderHandle: true,
+      isHiddenReaderConfig: true,
     };
   },
   // 显示阅读操作面板
@@ -36,6 +41,20 @@ const readerHandleReducer = handleActions({
       isHiddenReaderHandle: false,
     };
   },
+  // 隐藏阅读设置面板
+  [T.HIDE_READER_CONFIG]: (state) => {
+    return {
+      ...state,
+      isHiddenReaderConfig: true,
+    };
+  },
+  // 显示阅读设置面板
+  [T.SHOW_READER_CONFIG]: (state) => {
+    return {
+      ...state,
+      isHiddenReaderConfig: false,
+    };
+  },
   // 显示目录
   [T.SHOW_CATELOG]: (state) => {
     console.info('真的隐藏了')
@@ -43,6 +62,7 @@ const readerHandleReducer = handleActions({
       ...state,
       isHiddenCatelog: false,
       isHiddenReaderHandle: true,
+      isHiddenReaderConfig: true,
     };
   },
   // 隐藏目录
@@ -51,6 +71,7 @@ const readerHandleReducer = handleActions({
       ...state,
       isHiddenCatelog: true,
       isHiddenReaderHandle: true,
+      isHiddenReaderConfig: true,
     };
   },
   // 切换白天黑夜
@@ -59,6 +80,15 @@ const readerHandleReducer = handleActions({
     return {
       ...state,
       isNight: !state.isNight,
+      isHiddenReaderConfig: true,
+    };
+  },
+  // 设置背景色
+  [T.SET_BG_COLOR]: (state, action) => {
+    return {
+      ...state,
+      isNight: false,
+      bgColor: action.payload
     };
   },
 }, initialState);

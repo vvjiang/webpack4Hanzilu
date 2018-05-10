@@ -24,11 +24,11 @@ class Catelog extends React.Component {
       width: '100vw',
       height: '100vh',
       zIndex: 2,
-      top: 0,
+      top: 0
     };
     return (
       <div style={style} className={this.props.isHiddenCatelog ? 'hide' : null}>
-        <div style={{ float: 'right', width: '300px', height: '100vh', backgroundColor: '#fff' }}>
+        <div style={{ float: 'right', width: '300px', height: '100vh', backgroundColor: '#fff', color: '#333' }}>
           <h2>目录</h2>
           <PullToRefresh
             style={{

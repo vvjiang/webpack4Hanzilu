@@ -12,4 +12,7 @@ export const hideReaderConfig = createAction(T.HIDE_READER_CONFIG);
 export const showReaderConfig = createAction(T.SHOW_READER_CONFIG);
 // 切换白天黑夜
 export const toggleNight = createAction(T.TOGGLE_NIGHT);
-
+// 设置背景色
+export const setBGColor = createAction(T.SET_BG_COLOR, (color) => {
+  return color;
+});

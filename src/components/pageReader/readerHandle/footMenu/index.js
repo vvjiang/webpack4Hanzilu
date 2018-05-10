@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'antd-mobile';
 import styles from './index.css';
-import { showCatelog, toggleNight } from '../../actions';
+import { showCatelog, toggleNight, showReaderConfig } from '../../actions';
 
 const FootMenu = (props) => {
   /**
@@ -17,6 +16,7 @@ const FootMenu = (props) => {
    * 打开阅读设置
    */
   const openReaderConfig = (event) => {
+    props.showReaderConfig();
     event.stopPropagation();
   };
 
@@ -38,4 +38,5 @@ const FootMenu = (props) => {
 export default connect(null, {
   showCatelog,
   toggleNight,
+  showReaderConfig,
 })(FootMenu);
