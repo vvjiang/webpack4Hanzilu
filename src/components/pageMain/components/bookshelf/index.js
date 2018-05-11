@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, NoticeBar } from 'antd-mobile';
 import Book from './book';
-import './index.css';
+import classes from './index.less';
 
 /**
  * 书架组件
@@ -20,11 +20,11 @@ class Bookshelf extends React.Component {
     };
     const itemList = this.props.dataSource.map((item) => {
       return (
-        <Book key={item.id} bookCode={item.id} title={item.title} description={item.description} />
+        <Book key={item._id} dataSource={item} />
       );
     });
     return (
-      <List renderHeader={notice} className="book-shelf">
+      <List renderHeader={notice} className={classes['book-shelf']}>
         {itemList}
       </List>
     );

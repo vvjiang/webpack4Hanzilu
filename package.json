@@ -46,9 +46,8 @@
     "mock": "json-server --watch mock/db.json"
   },
   "dependencies": {
+    "antd-mobile": "^2.1.8",
     "axios": "^0.17.1",
-    "ant-mobile": "0.0.0",
-    "antd-mobile": "^2.1.6",
     "clean-webpack-plugin": "^0.1.18",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^2.30.1",

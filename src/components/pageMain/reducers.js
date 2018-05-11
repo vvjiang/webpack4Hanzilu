@@ -22,7 +22,7 @@ const pageMainReducer = handleActions({
   [T.DELETE_BOOK]: (state, { payload: { bookCode } }) => {
     return {
       ...state,
-      bookList: state.bookList.filter(l => l.id !== bookCode),
+      bookList: state.bookList.filter(l => l._id !== bookCode),
     };
   },
 }, initialState);

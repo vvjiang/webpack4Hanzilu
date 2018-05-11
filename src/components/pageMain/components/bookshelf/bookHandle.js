@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Popover, Toast } from 'antd-mobile';
 import { deleteBook } from '../../actions';
 import IconFA from '../../../common/iconFA';
-import './index.css';
 
 const { Item } = Popover;
 /**

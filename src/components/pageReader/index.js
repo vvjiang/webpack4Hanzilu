@@ -1,16 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { showReaderHandle, hideReaderHandle } from './actions';
 import ReaderHandle from './readerHandle';
 import Catelog from './catelog';
 import ReaderConfig from './readerConfig';
+
 /**
  * 阅读页面
  */
 class PageReader extends React.Component {
   state = {
-    currentContent: '这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，这个一个antd测试程序，',
+    currentContent: '',
+    title: ''
+  }
+  componentDidMount() {
+    axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(this.props.match.params.link)}`).then(({ data: result }) => {
+      if (result.ok) {
+        this.setState({
+          currentContent: result.chapter.cpContent,
+          title: result.chapter.title
+        });
+      }
+    });
   }
   /**
    * 返回首页
@@ -37,7 +50,10 @@ class PageReader extends React.Component {
 
     return (
       <div style={{ minHeight: '100vh', width: '100vw', ...readStyle }} role="button" onClick={this.clickOpenReaderHandle}>
-        {this.state.currentContent}
+        <div style={{ whiteSpace: 'pre-wrap' }}>
+          <p>{this.state.title}</p>
+          {this.state.currentContent}
+        </div>
         <ReaderHandle />
         <Catelog />
         <ReaderConfig />
@@ -52,6 +68,6 @@ export default withRouter(connect((state) => {
     bgColor: state.pageReader.bgColor,
   };
 }, {
-  showReaderHandle,
-  hideReaderHandle,
-})(PageReader));
+    showReaderHandle,
+    hideReaderHandle,
+  })(PageReader));

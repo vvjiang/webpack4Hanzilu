@@ -19,7 +19,7 @@ const App = () => (
       <div>
         <Route exact path="/" component={PageMain} />
         <Route path="/search" component={PageSearch} />
-        <Route path="/reader" component={PageReader} />
+        <Route path="/reader/:bookid/:link" component={PageReader} />
       </div>
     </Router>
   </Provider>

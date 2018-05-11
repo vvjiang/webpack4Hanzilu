@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Button, List } from 'antd-mobile';
 import IconFA from '../../../common/iconFA';
 import './index.less';
@@ -25,17 +26,33 @@ class BookListItem extends React.Component {
       text: '加入中',
       disabled: true,
     });
-    localStorage.setItem(`book${this.props.dataSource.id}`, JSON.stringify(this.props.dataSource));
-    setTimeout(() => {
-      this.setState({
-        loading: false,
-        text: '已在书架',
-        icon: (<IconFA color="#0d6" value="check-circle" />),
+    const storeInfo = {
+      title: this.props.dataSource.title,
+      shortIntro: this.props.dataSource.shortIntro,
+      cover: this.props.dataSource.cover,
+      lastChapter: this.props.dataSource.lastChapter,
+      author: this.props.dataSource.author
+    };
+    axios.get('http://novel.juhe.im/book-sources', {
+      params: {
+        view: 'summary',
+        book: this.props.dataSource._id
+      }
+    }).then(({ data: sourceArray }) => {
+      storeInfo._id = sourceArray[0]._id; // 在这里默认不选追书神器的ID
+      axios.get(`http://novel.juhe.im/book-chapters/${storeInfo._id}`).then(({ data }) => {
+        storeInfo.currentChapter = data.chapters[0].link;
+        localStorage.setItem(`book${this.props.dataSource._id}`, JSON.stringify(storeInfo));
+        this.setState({
+          loading: false,
+          text: '已在书架',
+          icon: (<IconFA color="#0d6" value="check-circle" />),
+        });
       });
-    }, 3000);
+    });
   }
   render() {
-    const { id, title, description } = this.props.dataSource;
+    const { title, shortIntro, cover } = this.props.dataSource;
     const btn = (
       <Button icon={this.state.icon} disabled={this.state.disabled} size="small" loading={this.state.loading} onClick={this.addBookToShelf}>
         {this.state.text}
@@ -43,13 +60,13 @@ class BookListItem extends React.Component {
     );
     return (
       <Item
-        key={id}
         extra={btn}
-        thumb="https://cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png"
+        thumb={`http://statics.zhuishushenqi.com${cover}`}
         multipleLine
+        wrap
       >
         {title}
-        <Brief > {description}</Brief >
+        <Brief > {shortIntro}</Brief >
       </Item >
     );
   }

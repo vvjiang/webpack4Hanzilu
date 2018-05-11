@@ -25,7 +25,7 @@ module.exports = merge(common, {
       exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader?sourceMap&modules'],
+        use: ['css-loader?modules&sourceMap'],
       }),
     }, {
       test: /\.css$/,
@@ -39,7 +39,7 @@ module.exports = merge(common, {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader?sourceMap&modules',
+        use: ['css-loader?modules&sourceMap',
           { loader: 'less-loader', options: { modifyVars: theme } },
         ],
       }),

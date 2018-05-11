@@ -20,15 +20,18 @@ class PageSearch extends React.Component {
    * 搜书
    */
   serachBook = (keyword) => {
-    axios.get('http://localhost:3000/searchBook', {
+    axios.get('http://novel.juhe.im/search', {
       params: {
-        title: keyword,
+        keyword,
       },
-    }).then(({ data }) => {
-      console.info(data);
-      this.setState({
-        bookList: data,
-      });
+    }).then(({ data: result }) => {
+      if (result.ok) {
+        this.setState({
+          bookList: result.books,
+        });
+      } else {
+        console.info('搜索失败');
+      }
     });
   }
   /**
