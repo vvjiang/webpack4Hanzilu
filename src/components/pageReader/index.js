@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { PullToRefresh } from 'antd-mobile';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { showReaderHandle, hideReaderHandle } from './actions';
@@ -12,19 +13,44 @@ import ReaderConfig from './readerConfig';
  */
 class PageReader extends React.Component {
   state = {
-    currentContent: '',
-    title: ''
+    currentContent: [],
+    chapterList: []
   }
+
   componentDidMount() {
     axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(this.props.match.params.link)}`).then(({ data: result }) => {
       if (result.ok) {
         this.setState({
-          currentContent: result.chapter.cpContent,
-          title: result.chapter.title
+          currentContent: [result.chapter.body]
+        });
+      }
+    });
+    axios.get(`http://novel.juhe.im/book-chapters/${this.props.match.params.bookid}`).then(({ data }) => {
+      const currentlink = decodeURIComponent(this.props.match.params.link);
+      this.chapterIndex = data.chapters.findIndex((item) => {
+        return item.link === currentlink;
+      });
+      this.setState({
+        chapterList: data.chapters
+      });
+    });
+  }
+
+  componentWillReceiveProps(preProps) {
+    axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(preProps.match.params.link)}`).then(({ data: result }) => {
+      if (result.ok) {
+        this.setState({
+          currentContent: [result.chapter.body]
+        });
+        const currentlink = decodeURIComponent(preProps.match.params.link);
+        this.chapterIndex = this.state.chapters.findIndex((item) => {
+          return item.link === currentlink;
         });
       }
     });
   }
+
+  chapterIndex = 0
   /**
    * 返回首页
    */
@@ -38,6 +64,7 @@ class PageReader extends React.Component {
     this.props.showReaderHandle();
     event.stopPropagation();
   }
+
   render() {
     const readStyle = {
       color: '#333',
@@ -50,14 +77,40 @@ class PageReader extends React.Component {
 
     return (
       <div style={{ minHeight: '100vh', width: '100vw', ...readStyle }} role="button" onClick={this.clickOpenReaderHandle}>
-        <div style={{ whiteSpace: 'pre-wrap' }}>
-          <p>{this.state.title}</p>
-          {this.state.currentContent}
+        <div style={{ whiteSpace: 'pre-wrap', lineHeight: 2 }}>
+          <PullToRefresh
+            style={{
+              overflow: 'auto',
+            }}
+            direction="up"
+            refreshing={this.state.refreshing}
+            onRefresh={() => {
+              this.setState({ refreshing: true });
+              console.info('cool')
+              if (this.state.chapterList[this.chapterIndex]) {
+                axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(this.state.chapterList[this.chapterIndex + 1].link)}`).then(({ data: result }) => {
+                  if (result.ok) {
+                    this.chapterInde += 1;
+
+                    this.setState((prevState) => {
+                      prevState.currentContent.push(result.chapter.body);
+                      return {
+                        currentContent: prevState.currentContent.slice(0),
+                        refreshing: false
+                      };
+                    });
+                  }
+                });
+              }
+            }}
+          >
+            {this.state.currentContent.map((content, index) => (<p key={index}>{content}</p>))}
+          </PullToRefresh>
         </div>
         <ReaderHandle />
-        <Catelog />
+        <Catelog bookid={this.props.match.params.bookid} dataSource={this.state.chapterList} />
         <ReaderConfig />
-      </div>
+      </div >
     );
   }
 }

@@ -11,6 +11,7 @@
       "react/prop-types": [0],
       "react/no-unused-prop-types":[0],
       "react/jsx-filename-extension": [1, { "extensions": [".js",".jsx"] }],
+      "react/jsx-first-prop-new-line":[0],
       "arrow-body-style": [0],
       "no-console":"warn",
       "jsx-a11y/anchor-is-valid": [0],
@@ -21,6 +22,7 @@
       "import/prefer-default-export": [0],
       "comma-dangle":[0],
       "no-underscore-dangle": [0],
-      "object-curly-newline":[0]
+      "object-curly-newline":[0],
+      "indent":[0]
     }
 }

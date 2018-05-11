@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { hideReaderConfig, setBGColor } from '../actions';
 import classes from './index.css';
-import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 /**
  * 阅读设置
@@ -29,13 +28,18 @@ const ReaderConfig = (props) => {
       <ul className={classes['color-list']} >
         {
           colorStyle.map((color) => {
-            return (<li key={color} onClick={() => { props.setBGColor(color); }} style={{ backgroundColor: color }} />);
+            return (<li key={color}
+              onClick={() => {
+                props.setBGColor(color);
+              }}
+              style={{ backgroundColor: color }}
+            />);
           })
         }
       </ul>
     </div >
   );
-}
+};
 
 export default connect(
   (state) => {

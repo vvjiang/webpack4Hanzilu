@@ -57,7 +57,6 @@ const readerHandleReducer = handleActions({
   },
   // 显示目录
   [T.SHOW_CATELOG]: (state) => {
-    console.info('真的隐藏了')
     return {
       ...state,
       isHiddenCatelog: false,
@@ -76,7 +75,6 @@ const readerHandleReducer = handleActions({
   },
   // 切换白天黑夜
   [T.TOGGLE_NIGHT]: (state) => {
-    console.info(!state.isNight)
     return {
       ...state,
       isNight: !state.isNight,

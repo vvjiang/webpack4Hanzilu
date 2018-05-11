@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { PullToRefresh } from 'antd-mobile';
 import { hideCatelog } from '../actions';
 
@@ -16,6 +17,14 @@ class Catelog extends React.Component {
   closeCatelog = (event) => {
     this.props.hideCatelog();
     event.stopPropagation();
+  }
+
+  goToChapter = (e) => {
+    e.stopPropagation();
+    const { link } = e.target.dataset;
+    this.props.history.push(`/reader/${this.props.bookid}/${encodeURIComponent(link)}`);
+    // this.props.onChangeChapter(link);
+    this.props.hideCatelog();
   }
 
   render() {
@@ -44,82 +53,16 @@ class Catelog extends React.Component {
               }, 1000);
             }}
           >
-            <ul>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据1</li>
-              <li>测试数据12345</li>
+            <ul onClick={this.goToChapter}>
+              {
+                this.props.dataSource.map((chapter) => {
+                  return (
+                    <li key={chapter.link} data-link={chapter.link}>
+                      {chapter.title}
+                    </li>
+                  );
+                })
+              }
             </ul>
           </PullToRefresh>
         </div>
@@ -137,5 +80,5 @@ export default connect(
   },
   {
     hideCatelog,
-  },
-)(Catelog);
+  }
+)(withRouter(Catelog));
