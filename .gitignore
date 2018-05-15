@@ -6,3 +6,4 @@ node_modules/
 
 # 排除单元测试覆盖率结果文件夹
 coverage/
+package-lock.json
