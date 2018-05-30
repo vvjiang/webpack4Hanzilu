@@ -1,16 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { PullToRefresh } from 'antd-mobile';
 import { hideCatelog } from '../actions';
+import classes from './index.less';
 
 /**
  * 目录
  */
 class Catelog extends React.Component {
-  state = {
-    refreshing: false,
-  }
   /**
    * 隐藏目录
    */
@@ -30,41 +27,27 @@ class Catelog extends React.Component {
   render() {
     const style = {
       position: 'fixed',
-      width: '100vw',
-      height: '100vh',
       zIndex: 2,
-      top: 0
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0
     };
     return (
-      <div style={style} className={this.props.isHiddenCatelog ? 'hide' : null}>
-        <div style={{ float: 'right', width: '300px', height: '100vh', backgroundColor: '#fff', color: '#333' }}>
+      <div onClick={(e) => { e.stopPropagation(); }} style={style} className={this.props.isHiddenCatelog ? 'hide' : null}>
+        <div className={classes['catalog-container']} >
           <h2>目录</h2>
-          <PullToRefresh
-            style={{
-              height: 'calc(100vh - 60px)',
-              overflow: 'auto',
-            }}
-            direction="up"
-            refreshing={this.state.refreshing}
-            onRefresh={() => {
-              this.setState({ refreshing: true });
-              setTimeout(() => {
-                this.setState({ refreshing: false });
-              }, 1000);
-            }}
-          >
-            <ul onClick={this.goToChapter}>
-              {
-                this.props.dataSource.map((chapter) => {
-                  return (
-                    <li key={chapter.link} data-link={chapter.link}>
-                      {chapter.title}
-                    </li>
-                  );
-                })
-              }
-            </ul>
-          </PullToRefresh>
+          <ul onClick={this.goToChapter}>
+            {
+              this.props.dataSource.map((chapter) => {
+                return (
+                  <li key={chapter.link} className={this.props.link === chapter.link ? classes.active : ''} data-link={chapter.link}>
+                    {chapter.title}
+                  </li>
+                );
+              })
+            }
+          </ul>
         </div>
         <div className="mask" role="button" style={{ height: '100vh', marginRight: '300px' }} onClick={this.closeCatelog} />
       </div >

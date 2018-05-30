@@ -31,12 +31,16 @@ const FootMenu = (props) => {
     <div className={styles['footer-menu']}>
       <span role="button" className={styles['footer-menu-item']} onClick={openCatelog}>目录</span>
       <span role="button" className={styles['footer-menu-item']} onClick={openReaderConfig}>设置</span>
-      <span role="button" className={styles['footer-menu-item']} onClick={switchNight}>白天</span>
+      <span role="button" className={styles['footer-menu-item']} onClick={switchNight}>{props.isNight ? '白天' : '夜晚'}</span>
     </div>
   );
 };
-export default connect(null, {
-  showCatelog,
-  toggleNight,
-  showReaderConfig,
-})(FootMenu);
+export default connect((store) => {
+  return {
+    isNight: store.pageReader.isNight
+  };
+}, {
+    showCatelog,
+    toggleNight,
+    showReaderConfig,
+  })(FootMenu);

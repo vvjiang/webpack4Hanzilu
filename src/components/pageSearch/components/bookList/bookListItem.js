@@ -42,7 +42,7 @@ class BookListItem extends React.Component {
       storeInfo._id = sourceArray.filter(l => l.source === 'my176')[0]._id; // 在这里默认不选追书神器的ID
       axios.get(`http://novel.juhe.im/book-chapters/${storeInfo._id}`).then(({ data }) => {
         storeInfo.currentChapter = data.chapters[0].link;
-        localStorage.setItem(`book${this.props.dataSource._id}`, JSON.stringify(storeInfo));
+        localStorage.setItem(`book${storeInfo._id}`, JSON.stringify(storeInfo));
         this.setState({
           loading: false,
           text: '已在书架',

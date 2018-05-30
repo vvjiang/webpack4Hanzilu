@@ -89,6 +89,14 @@ const readerHandleReducer = handleActions({
       bgColor: action.payload
     };
   },
+  // 获取背景颜色
+  [T.GET_BG_COLOR]: (state, action) => {
+    return {
+      ...state,
+      isNight: false,
+      bgColor: action.payload
+    };
+  }
 }, initialState);
 
 export default readerHandleReducer;
