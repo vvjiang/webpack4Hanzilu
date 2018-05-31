@@ -1,13 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { hideCatelog } from '../actions';
 import classes from './index.less';
 
 /**
  * 目录
  */
 class Catelog extends React.Component {
+  componentDidMount() {
+    setTimeout(() => {
+      if (document.getElementsByClassName(classes.active).length === 1) {
+        document.getElementsByClassName(classes.active)[0].scrollIntoView();
+      }
+    }, 500);
+  }
+  componentWillReceiveProps() {
+    if (document.getElementsByClassName(classes.active).length === 1) {
+      document.getElementsByClassName(classes.active)[0].scrollIntoView();
+    }
+  }
   /**
    * 隐藏目录
    */
@@ -19,6 +29,12 @@ class Catelog extends React.Component {
   goToChapter = (e) => {
     e.stopPropagation();
     const { link } = e.target.dataset;
+    const storeId = `book${this.props.bookid}`;
+
+    const bookInfo = JSON.parse(localStorage.getItem(storeId));
+    bookInfo.currentChapter = link;
+
+    localStorage.setItem(storeId, JSON.stringify(bookInfo));
     this.props.history.push(`/reader/${this.props.bookid}/${encodeURIComponent(link)}`);
     // this.props.onChangeChapter(link);
     this.props.hideCatelog();
@@ -41,7 +57,7 @@ class Catelog extends React.Component {
             {
               this.props.dataSource.map((chapter) => {
                 return (
-                  <li key={chapter.link} className={this.props.link === chapter.link ? classes.active : ''} data-link={chapter.link}>
+                  <li id={chapter.link} key={chapter.link} className={this.props.link === chapter.link ? classes.active : ''} data-link={chapter.link}>
                     {chapter.title}
                   </li>
                 );
@@ -55,13 +71,4 @@ class Catelog extends React.Component {
   }
 }
 
-export default connect(
-  (state) => {
-    return {
-      isHiddenCatelog: state.pageReader.isHiddenCatelog,
-    };
-  },
-  {
-    hideCatelog,
-  }
-)(withRouter(Catelog));
+export default withRouter(Catelog);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PullToRefresh } from 'antd-mobile';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { showReaderHandle, hideReaderHandle, getBGColor } from './actions';
+import { showReaderHandle, hideReaderHandle, getBGColor, hideCatelog } from './actions';
 import ReaderHandle from './readerHandle';
 import Catelog from './catelog';
 import ReaderConfig from './readerConfig';
@@ -18,15 +18,12 @@ class PageReader extends React.Component {
     currentLink: this.props.match.params.link
   }
 
+  componentWillMount() {
+    this.fullScreen();
+  }
+
   componentDidMount() {
     this.props.getBGColor();
-    axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(this.props.match.params.link)}`).then(({ data: result }) => {
-      if (result.ok) {
-        this.setState({
-          currentContent: [result.chapter.body]
-        });
-      }
-    });
     axios.get(`http://novel.juhe.im/book-chapters/${this.props.match.params.bookid}`).then(({ data }) => {
       const currentlink = decodeURIComponent(this.props.match.params.link);
       const chapterIndex = data.chapters.findIndex((item) => {
@@ -35,21 +32,37 @@ class PageReader extends React.Component {
       this.setState({
         chapterList: data.chapters,
         chapterIndex
+      }, () => {
+        axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(this.props.match.params.link)}`).then(({ data: result }) => {
+          if (result.ok) {
+            this.setState({
+              currentContent: [
+                {
+                  title: this.state.chapterList[chapterIndex].title,
+                  content: result.chapter.body
+                }
+              ]
+            });
+          }
+        });
       });
     });
   }
 
+
   componentWillReceiveProps(preProps) {
     axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(preProps.match.params.link)}`).then(({ data: result }) => {
       if (result.ok) {
-        this.setState({
-          currentContent: [result.chapter.body]
-        });
         const currentLink = decodeURIComponent(preProps.match.params.link);
         const chapterIndex = this.state.chapterList.findIndex((item) => {
           return item.link === currentLink;
         });
+        const bookInfo = this.state.chapterList[chapterIndex];
         this.setState({
+          currentContent: [{
+            title: bookInfo ? bookInfo.title : '',
+            content: result.chapter.body
+          }],
           currentLink,
           chapterIndex
         });
@@ -57,6 +70,31 @@ class PageReader extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.exitFullScreen();
+  }
+
+  /**
+   * 请求全屏
+   */
+  fullScreen = () => {
+    const el = document.documentElement;
+    const rfs = el.requestFullScreen || el.webkitRequestFullScreen ||
+      el.mozRequestFullScreen || el.msRequestFullScreen;
+    if (typeof rfs !== 'undefined' && rfs) {
+      rfs.call(el);
+    }
+  }
+  /**
+   * 退出全屏
+   */
+  exitFullScreen = () => {
+    const exitMethod = document.exitFullscreen || document.mozCancelFullScreen ||
+      document.webkitExitFullscreen || document.webkitExitFullscreen;
+    if (exitMethod) {
+      exitMethod.call(document);
+    }
+  }
   /**
    * 返回首页
    */
@@ -86,7 +124,9 @@ class PageReader extends React.Component {
           <PullToRefresh
             style={{
               overflow: 'auto',
+              height: '100vh'
             }}
+            damping={60}
             direction="up"
             refreshing={this.state.refreshing}
             onRefresh={() => {
@@ -97,10 +137,21 @@ class PageReader extends React.Component {
               }
               this.setState(refreshState, () => {
                 if (this.state.chapterList[this.state.chapterIndex + 1]) {
-                  axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(encodeURIComponent(this.state.chapterList[this.state.chapterIndex + 1].link))}`).then(({ data: result }) => {
+                  const newLink = this.state.chapterList[this.state.chapterIndex + 1].link;
+                  axios.get(`http://novel.juhe.im/chapters/${encodeURIComponent(encodeURIComponent(newLink))}`).then(({ data: result }) => {
                     if (result.ok) {
+                      const storeId = `book${this.props.match.params.bookid}`;
+
+                      const bookInfo = JSON.parse(localStorage.getItem(storeId));
+                      bookInfo.currentChapter = newLink;
+
+                      localStorage.setItem(storeId, JSON.stringify(bookInfo));
+
                       this.setState((prevState) => {
-                        prevState.currentContent.push(result.chapter.body);
+                        prevState.currentContent.push({
+                          title: prevState.chapterList[prevState.chapterIndex + 1].title,
+                          content: result.chapter.body
+                        });
                         return {
                           chapterIndex: prevState.chapterIndex + 1,
                           currentContent: prevState.currentContent.slice(0),
@@ -113,11 +164,20 @@ class PageReader extends React.Component {
               });
             }}
           >
-            {this.state.currentContent.map((content, index) => (<p key={index}>{content}</p>))}
+            {
+              this.state.currentContent.map((item, index) => (
+                <div key={item.title}>
+                  <p>{item.title || ''}</p>
+                  <p>
+                    {item.content}
+                  </p>
+                </div>
+              ))
+            }
           </PullToRefresh>
         </div>
         <ReaderHandle />
-        <Catelog link={this.state.currentLink} bookid={this.props.match.params.bookid} dataSource={this.state.chapterList} />
+        {!this.props.isHiddenCatelog && <Catelog isHiddenCatelog={this.props.isHiddenCatelog} hideCatelog={this.props.hideCatelog} link={this.state.currentLink} bookid={this.props.match.params.bookid} dataSource={this.state.chapterList} />}
         <ReaderConfig />
       </div >
     );
@@ -128,9 +188,11 @@ export default withRouter(connect((state) => {
   return {
     isNight: state.pageReader.isNight,
     bgColor: state.pageReader.bgColor,
+    isHiddenCatelog: state.pageReader.isHiddenCatelog,
   };
 }, {
     showReaderHandle,
     hideReaderHandle,
-    getBGColor
+    getBGColor,
+    hideCatelog
   })(PageReader));

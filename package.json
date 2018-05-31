@@ -35,6 +35,9 @@
     "json-server": "^0.12.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "postcss": "^6.0.22",
+    "postcss-loader": "^2.1.5",
+    "postcss-px-to-viewport": "0.0.3",
     "style-loader": "^0.19.1",
     "webpack-dev-server": "^2.11.1"
   },

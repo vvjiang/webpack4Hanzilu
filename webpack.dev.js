@@ -25,14 +25,14 @@ module.exports = merge(common, {
       exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader?modules&sourceMap'],
+        use: ['css-loader?modules&sourceMap', 'postcss-loader'],
       }),
     }, {
       test: /\.css$/,
       include: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
-        use: ['css-loader?sourceMap'],
+        use: ['css-loader?sourceMap', 'postcss-loader'],
       }),
     },
     {
@@ -41,6 +41,7 @@ module.exports = merge(common, {
         fallback: 'style-loader',
         use: ['css-loader?modules&sourceMap',
           { loader: 'less-loader', options: { modifyVars: theme } },
+          'postcss-loader'
         ],
       }),
     },
