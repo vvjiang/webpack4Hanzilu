@@ -7,7 +7,7 @@ import SearchHeader from './components/searchHeader';
 import BookList from './components/bookList';
 
 /**
- * 首页
+ * 搜索书籍页面
  */
 class PageSearch extends React.Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class PageSearch extends React.Component {
       bookList: [],
     };
   }
+
   /**
    * 搜书
    */

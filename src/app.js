@@ -4,11 +4,28 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import PageMain from './components/pageMain';
-import PageSearch from './components/pageSearch';
-import PageReader from './components/pageReader';
+import Loadable from 'react-loadable';
 import reducer from './reducers';
 import './app.less';
+
+function Loading() {
+  return <div>Loading...</div>;
+}
+
+const PageMain = Loadable({
+  loader: () => import('./components/pageMain'),
+  loading: Loading,
+});
+
+const PageSearch = Loadable({
+  loader: () => import('./components/pageSearch'),
+  loading: Loading,
+});
+
+const PageReader = Loadable({
+  loader: () => import('./components/pageReader'),
+  loading: Loading,
+});
 
 
 const store = createStore(reducer);

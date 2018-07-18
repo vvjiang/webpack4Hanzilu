@@ -1,7 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const pathsToClean = [
   'build',
@@ -10,10 +11,15 @@ const pathsToClean = [
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: ['babel-polyfill', './src/app.js'],
+  entry: {
+    main: ['babel-polyfill', './src/app.js'],
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[chunkhash].js',
+    // 添加 chunkFilename
+    publicPath: '/',
+    chunkFilename: '[name].[chunkhash:5].chunk.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
