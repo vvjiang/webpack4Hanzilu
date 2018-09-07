@@ -1,6 +1,9 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import promiseMiddleware from 'redux-promise';
 import ReactDOM from 'react-dom';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { HashRouter as Router, Route } from 'react-router-dom';
@@ -28,7 +31,7 @@ const PageReader = Loadable({
 });
 
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk, createLogger, promiseMiddleware));
 
 const App = () => (
   <Provider store={store}>

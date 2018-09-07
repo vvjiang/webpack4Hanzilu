@@ -6,7 +6,7 @@ import * as T from './actionTypes';
  */
 export const getBookList = createAction(T.LIST_BOOK, () => {
   const data = Object.entries(localStorage);
-  return data.filter(l => l[0].slice(0, 4) === 'book').map(l => JSON.parse(l[1]));
+  return Promise.resolve(data.filter(l => l[0].slice(0, 4) === 'book').map(l => JSON.parse(l[1])));
 });
 
 /**

@@ -11,7 +11,9 @@ import { getBookList, deleteBook } from './actions';
  */
 class PageMain extends React.Component {
   componentDidMount() {
-    this.props.getBookList();
+    this.props.getBookList().then(() => {
+      console.info('加载完毕');
+    });
   }
   render() {
     return (
