@@ -18,3 +18,5 @@
 - 单元测试采用jest,enzyme
 - json-server模拟服务器返回数据
 - axios进行ajax请求
+- 集成redux中间件redux-thunk和redux-promise，使得处理异步action更简单
+- 集成redux中间件redux-logger，跟踪action及其dispatch前后状态的变化
