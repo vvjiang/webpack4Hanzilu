@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const pathsToClean = [
   'build',
@@ -30,7 +30,7 @@ module.exports = {
       },
       hash: isProduction,
     }),
-    new ExtractTextPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
     new CleanWebpackPlugin(pathsToClean),
   ],
   module: {

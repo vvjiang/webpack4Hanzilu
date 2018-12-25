@@ -1,7 +1,9 @@
+
+
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { theme } = require('./package.json');
 
 module.exports = merge(common, {
@@ -23,27 +25,19 @@ module.exports = merge(common, {
     rules: [{
       test: /\.css$/,
       exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader?modules&sourceMap', 'postcss-loader'],
-      }),
+      use: [MiniCssExtractPlugin.loader, 'css-loader?modules&sourceMap'],
     }, {
       test: /\.css$/,
       include: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader?sourceMap', 'postcss-loader'],
-      }),
+      use: [MiniCssExtractPlugin.loader, 'css-loader?sourceMap'],
     },
     {
       test: /\.less$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader?modules&sourceMap',
-          { loader: 'less-loader', options: { modifyVars: theme } },
-          'postcss-loader'
-        ],
-      }),
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader?modules&sourceMap',
+        { loader: 'less-loader', options: { modifyVars: theme } }
+      ],
     },
     ],
   },
