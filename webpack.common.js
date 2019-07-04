@@ -21,7 +21,7 @@ module.exports = {
     publicPath: '/',
     chunkFilename: '[name].[chunkhash:5].chunk.js',
   },
-  resolve:{
+  resolve: {
     alias: {
       common: path.resolve(__dirname, 'src/components/common')
     }
@@ -30,6 +30,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './template/index.html',
       filename: 'demo.html',
+      favicon: './src/images/favicon_32.ico',
       minify: {
         collapseWhitespace: true,
       },
