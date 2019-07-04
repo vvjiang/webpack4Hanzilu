@@ -21,6 +21,11 @@ module.exports = {
     publicPath: '/',
     chunkFilename: '[name].[chunkhash:5].chunk.js',
   },
+  resolve:{
+    alias: {
+      common: path.resolve(__dirname, 'src/components/common')
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './template/index.html',

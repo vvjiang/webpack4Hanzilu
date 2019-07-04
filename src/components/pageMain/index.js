@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Footer from '../common/footer';
+import Footer from 'common/footer';
 import FullscreenContainer from '../common/fullscreenContainer';
 import MainHeader from './components/mainHeader';
 import Bookshelf from './components/bookshelf';
