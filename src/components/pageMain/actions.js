@@ -1,18 +1,10 @@
 import { createAction } from 'redux-actions';
+import axios from 'axios'
 import * as T from './actionTypes';
 
 /**
- * 获取书籍信息
+ * 获取基金数据
  */
-export const getBookList = createAction(T.LIST_BOOK, () => {
-  const data = Object.entries(localStorage);
-  return Promise.resolve(data.filter(l => l[0].slice(0, 4) === 'book').map(l => JSON.parse(l[1])));
-});
-
-/**
- * 删除书籍
- */
-export const deleteBook = createAction(T.DELETE_BOOK, (bookCode) => {
-  localStorage.removeItem(`book${bookCode}`);
-  return { bookCode };
+export const getDataList = createAction(T.GET_DATA_LIST, (fundCode, startDate, endDate, pageSize) => {
+  return axios.get(`http://localhost:8011/getList?fundCode=${fundCode}&startDate=${startDate}&endDate=${endDate}&pageSize=${pageSize}`)
 });

@@ -14,10 +14,7 @@ function Loading() {
   return <div>Loading...</div>;
 }
 
-const PageMain = React.lazy(() => import('./components/pageMain'));
-const PageSearch = React.lazy(() => import('./components/pageSearch'));
-const PageReader = React.lazy(() => import('./components/pageReader'));
-
+const PageMain = React.lazy(() => import('./components/pageMain/index.jsx'));
 
 const store = createStore(reducer, applyMiddleware(thunk, createLogger, promiseMiddleware));
 
@@ -27,8 +24,6 @@ const App = () => (
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/" component={PageMain} />
-          <Route path="/search" component={PageSearch} />
-          <Route path="/reader/:bookid/:link" component={PageReader} />
         </Switch>
       </Suspense>
     </Router>

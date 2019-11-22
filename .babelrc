@@ -1,6 +1,7 @@
 {
   "presets": ["env", "react","stage-0","stage-3"],
   "plugins": [
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    "transform-decorators-legacy"
   ]
 }

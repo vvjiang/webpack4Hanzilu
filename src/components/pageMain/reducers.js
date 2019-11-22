@@ -3,28 +3,33 @@ import * as T from './actionTypes';
 
 
 const initialState = {
-  bookList: [],
+  dataList: []
 };
 
 const pageMainReducer = handleActions({
-  [T.LIST_BOOK]:
-    {
-      next(state, action) {
+  [T.GET_DATA_LIST]:
+  {
+    next(state, action) {
+      if (!action.payload.data.Data) {
         return {
           ...state,
-          bookList: action.payload,
-        };
-      },
-      throw(state) {
-        return state;
-      },
+          dataList: []
+        }
+      }
+      return {
+        ...state,
+        dataList: action.payload.data.Data.LSJZList.reverse().map(l => ({
+          netValueDate: l.FSRQ,
+          netValue: l.DWJZ,
+          totalNetValue: l.LJJZ,
+          dayOfGrowth: l.JZZZL
+        }))
+      }
     },
-  [T.DELETE_BOOK]: (state, { payload: { bookCode } }) => {
-    return {
-      ...state,
-      bookList: state.bookList.filter(l => l._id !== bookCode),
-    };
-  },
+    throw(state) {
+      return state;
+    },
+  }
 }, initialState);
 
 export default pageMainReducer;

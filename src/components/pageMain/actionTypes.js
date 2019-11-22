@@ -1,8 +1,4 @@
 /**
-   *  获取书籍列表
+   *  获取基金数据
    */
-export const LIST_BOOK = 'LIST_BOOK';
-/**
-   *  删除书籍
-   */
-export const DELETE_BOOK = 'DELETE_BOOK';
+export const GET_DATA_LIST = 'GET_DATA_LIST';
