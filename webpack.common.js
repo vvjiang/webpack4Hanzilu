@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const tsImportPluginFactory = require('ts-import-plugin')
 
 const pathsToClean = [
   'build',
@@ -56,7 +57,22 @@ module.exports = {
           },
         },
       },
-      { test: /\.tsx?$/, loader: "awesome-typescript-loader" }, // 先解析ts和tsx，rule规则从下往上
+      {
+        test: /\.tsx?$/,
+        loader: "awesome-typescript-loader",
+        options: {
+          getCustomTransformers: () => ({
+            before: [tsImportPluginFactory([
+              {
+                libraryName: 'antd',
+                libraryDirectory: 'lib',
+                style: 'css'
+              }
+            ])]
+          }),
+        },
+        exclude: /node_modules/
+      }, // 先解析ts和tsx，rule规则从下往上
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
         use: [{
