@@ -1,12 +1,26 @@
 import React from 'react'
-import { DatePicker, InputNumber, Input, Button, Row, Col } from 'antd'
+import { DatePicker, InputNumber, Input, Row, Col } from 'antd'
 import moment from 'moment'
 import ComputeItem from './ComputeItem/index'
 import styles from './index.css'
+import { RangePickerValue } from 'antd/lib/date-picker/interface'
 
 const { RangePicker } = DatePicker;
 
-export default class Compute extends React.Component {
+
+interface DataSourceItem {
+  dayOfGrowth: string;
+  netValueDate: string;
+}
+
+interface ComputeProps {
+  rangeValue: RangePickerValue;
+  fundCode: string;
+  dataSource: DataSourceItem[];
+  onChange(value: Object): void;
+}
+
+export default class Compute extends React.Component<ComputeProps, Object> {
   state = {
     rangeValue: this.props.rangeValue,
     money4Day: 30, // 每日定投金额
@@ -14,19 +28,19 @@ export default class Compute extends React.Component {
   }
 
   // 改变定投时间
-  handleChangeTime = (rangeValue) => {
+  handleChangeTime = (rangeValue: RangePickerValue) => {
     this.props.onChange({
       rangeValue
     })
   }
   // 改变每日定投金额
-  handleChangeMoney4Day = (money4Day) => {
+  handleChangeMoney4Day = (money4Day: number) => {
     this.setState({
       money4Day
     })
   }
   // 改变基金代码
-  handleChangeFundCode = (e) => {
+  handleChangeFundCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fundCode = e.target.value
     this.props.onChange({
       fundCode

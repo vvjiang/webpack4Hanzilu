@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.css'
 
-export interface ComputeItemProps {
+interface ComputeItemProps {
   label: string;
   children: React.ReactNode;
 }

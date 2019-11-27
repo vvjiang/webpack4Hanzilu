@@ -6,6 +6,7 @@
     "noImplicitAny": true, // 在表达式和声明上有隐含的 any类型时报错。
     "module": "esnext", // 模块引入方式
     "target": "esnext", // 指定ECMAScript目标版本
+    "moduleResolution": "node", // 决定如何处理模块
     "lib": [
       "esnext",
       "dom"

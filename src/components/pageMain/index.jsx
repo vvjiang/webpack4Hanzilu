@@ -2,8 +2,8 @@ import React from 'react';
 import moment from 'moment'
 import { connect } from 'react-redux';
 import { getDataList } from './actions';
-import Chart from './Chart/index.jsx'
-import Compute from './Compute/index.jsx'
+import Chart from './Chart/index'
+import Compute from './Compute/index'
 
 /**
  * 首页

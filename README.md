@@ -2,6 +2,11 @@
 
 一个自用的webpack脚手架
 
+使用：
+
+    npm run server // 先开启本地爬虫
+    npm run dev // 再启动本地环境
+
 功能：
 
 - ES6语法与新增类函数支持
