@@ -1,7 +1,7 @@
 import React from 'react'
 import { DatePicker, InputNumber, Input, Button, Row, Col } from 'antd'
 import moment from 'moment'
-import ComputeItem from './ComputeItem/index.jsx'
+import ComputeItem from './ComputeItem/index'
 import styles from './index.css'
 
 const { RangePicker } = DatePicker;
@@ -119,9 +119,6 @@ export default class Compute extends React.Component {
               <ComputeItem label="定投金额">
                 <InputNumber min={1} onChange={this.handleChangeMoney4Day} value={money4Day} />
               </ComputeItem>
-              {/* <div className={styles['btn-group']}>
-                <Button type="primary" onClick={this.handleClickCompute}>计算收益</Button>
-              </div> */}
             </div>
           </Col>
           <Col span={6}>

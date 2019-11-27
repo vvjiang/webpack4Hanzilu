@@ -24,7 +24,8 @@ module.exports = {
   resolve: {
     alias: {
       common: path.resolve(__dirname, 'src/components/common')
-    }
+    },
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -40,45 +41,47 @@ module.exports = {
     new CleanWebpackPlugin(pathsToClean),
   ],
   module: {
-    rules: [{
-      test: /\.jsx?$/,
-      exclude: /(node_modules)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['react', 'env', 'stage-0', 'stage-3'],
-          plugins: [
-            'transform-decorators-legacy',
-            ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
-          ],
+    rules: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['react', 'env', 'stage-0', 'stage-3'],
+            plugins: [
+              'transform-decorators-legacy',
+              ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
+            ],
+          },
         },
       },
-    },
-    {
-      test: /\.(gif|png|jpe?g|svg)$/i,
-      use: [{
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          outputPath: 'images/',
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" }, // 先解析ts和tsx，rule规则从下往上
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/',
+          },
         },
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true,
+          },
+        },
+        ],
       },
       {
-        loader: 'image-webpack-loader',
-        options: {
-          bypassOnDebug: true,
-        },
-      },
-      ],
-    },
-    {
-      test: /\.html$/,
-      use: [{
-        loader: 'html-loader',
-        options: {
-          minimize: true,
-        },
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+          },
+        }],
       }],
-    }],
   },
 };

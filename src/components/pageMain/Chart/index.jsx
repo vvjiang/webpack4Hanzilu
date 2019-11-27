@@ -62,10 +62,8 @@ export default class Chart extends React.Component {
   }
 
   initEcharts() {
-
     // 基于准备好的dom，初始化echarts实例
     this.myChart = echarts.init(document.getElementById('echart_1'));
-
 
     window.addEventListener("resize", this.myChart.resize, false);
   }
