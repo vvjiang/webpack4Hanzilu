@@ -1,4 +1,9 @@
 // 定义所有的css 文件
+declare module '*.less' {
+  const content: any;
+  export default content;
+}
+// 定义所有的css 文件
 declare module '*.css' {
   const content: any;
   export default content;

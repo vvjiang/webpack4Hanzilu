@@ -1,0 +1,12 @@
+.container{
+  background:#add8e6;
+}
+.header{
+  height: 60px;
+  line-height: 60px;
+  width: 1024px;
+  margin: 0 auto;
+  font-size: 24px;
+  font-weight: bold;
+  color: #233;
+}

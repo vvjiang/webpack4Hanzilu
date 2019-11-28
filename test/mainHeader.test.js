@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
 import Enzyme from './config/Enzyme.config';
-import MainHeader from '../src/components/pageMain/components/mainHeader';
+import MainHeader from '../src/modules/pageMain/components/mainHeader';
 
 const { mount } = Enzyme;
 
