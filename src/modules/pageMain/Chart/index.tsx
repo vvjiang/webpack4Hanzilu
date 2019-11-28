@@ -1,16 +1,32 @@
 import React from 'react';
-import echarts from 'echarts';
+import echarts, { ECharts, EChartOption } from 'echarts';
 import styles from './index.css'
 
+interface DataItems {
+  netValueDate: string;
+  netValue: string;
+  totalNetValue: string;
+  dayOfGrowth: string;
+}
 
-export default class Chart extends React.Component {
+interface ChartProps {
+  dataSource: DataItems[];
+}
+
+export default class Chart extends React.Component<ChartProps, Object> {
   componentDidMount() {
     this.initEcharts()
     this.refreshEcharts()
   }
 
+  myChart: ECharts | undefined
+
+  handleWindowResize = () => {
+    this.myChart.resize()
+  }
+
   componentWillUnmount() {
-    window.removeEventListener("resize", this.myChart.resize);
+    window.removeEventListener("resize", this.handleWindowResize);
   }
 
   componentDidUpdate() {
@@ -30,13 +46,14 @@ export default class Chart extends React.Component {
       dayOfGrowth: item.dayOfGrowth
     }))
     // 指定图表的配置项和数据
-    var option = {
+    var option: EChartOption<EChartOption.SeriesLine> = {
       title: {
-        text: '动态数据 + 时间坐标轴'
+        text: '动态数据',
+        textAlign: 'auto'
       },
       tooltip: {
         trigger: 'axis',
-        formatter: function (params) {
+        formatter: function (params: any) {
           params = params[0];
           var data = params.data;
           return `${data.name}<br /> 单位净值 ${data.value}<br /> 累计净值 ${data.totalNetValue}<br /> 日涨幅 ${Number.parseFloat(data.dayOfGrowth)}%`;
@@ -63,9 +80,9 @@ export default class Chart extends React.Component {
 
   initEcharts() {
     // 基于准备好的dom，初始化echarts实例
-    this.myChart = echarts.init(document.getElementById('echart_1'));
+    this.myChart = echarts.init(document.getElementById('echart_1') as HTMLCanvasElement);
 
-    window.addEventListener("resize", this.myChart.resize, false);
+    window.addEventListener("resize", this.handleWindowResize, false);
   }
 
   render() {
