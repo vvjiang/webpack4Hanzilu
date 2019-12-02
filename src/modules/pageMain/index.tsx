@@ -1,22 +1,38 @@
 import React from 'react';
-import moment from 'moment'
+import moment, { Moment } from 'moment'
 import { connect } from 'react-redux';
-import { getDataList } from './actions';
+import { getDataList, ActionTypeGetDataList } from './actions';
 import Chart from './Chart'
 import Compute from './Compute'
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
+import { PageReduxState } from '../../store/reducers';
+import { DataItems } from './reducers';
+
+interface PageMainProps {
+  dataList: DataItems[],
+  getDataList: ActionTypeGetDataList
+}
+
+interface PageMainState {
+  rangeValue: RangePickerValue,
+  fundCode: string
+}
+
+const mapStateToProps = (state: PageReduxState) => {
+  const { pageMain } = state
+  return {
+    dataList: pageMain.dataList,
+  };
+}
 
 /**
  * 首页
  */
-@connect(({ pageMain }) => {
-  return {
-    dataList: pageMain.dataList,
-  };
-}, { getDataList })
-export default class PageMain extends React.Component {
+@connect(mapStateToProps, { getDataList })
+export default class PageMain extends React.Component<PageMainProps, PageMainState> {
   state = {
-    rangeValue: [moment().subtract(3, 'years'), moment()],
-    fundCode: 100038
+    rangeValue: [moment().subtract(3, 'years'), moment()] as RangePickerValue,
+    fundCode: '100038'
   }
   componentDidMount() {
     this.getList()
@@ -31,7 +47,7 @@ export default class PageMain extends React.Component {
     this.props.getDataList(fundCode, startDate, endDate, pageSize)
   }
 
-  handleChange = (params) => {
+  handleChange = (params: PageMainState) => {
     this.setState(params, this.getList)
   }
 

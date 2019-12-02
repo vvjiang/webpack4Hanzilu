@@ -6,8 +6,8 @@ import createLogger from 'redux-logger';
 import promiseMiddleware from 'redux-promise';
 import ReactDOM from 'react-dom';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { HashRouter as Router, Route, IndexRoute, Switch } from 'react-router-dom';
-import reducer from './reducers';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import reducer from 'store/reducers';
 import './app.less';
 
 import Frame from 'modules/layout/Frame'

@@ -4,19 +4,14 @@ import moment from 'moment'
 import ComputeItem from './ComputeItem/index'
 import styles from './index.css'
 import { RangePickerValue } from 'antd/lib/date-picker/interface'
+import { DataItems } from '../reducers'
 
 const { RangePicker } = DatePicker;
-
-
-interface DataSourceItem {
-  dayOfGrowth: string;
-  netValueDate: string;
-}
 
 interface ComputeProps {
   rangeValue: RangePickerValue;
   fundCode: string;
-  dataSource: DataSourceItem[];
+  dataSource: DataItems[];
   onChange(value: Object): void;
 }
 

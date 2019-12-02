@@ -1,13 +1,7 @@
 import React from 'react';
 import echarts, { ECharts, EChartOption } from 'echarts';
 import styles from './index.css'
-
-interface DataItems {
-  netValueDate: string;
-  netValue: string;
-  totalNetValue: string;
-  dayOfGrowth: string;
-}
+import { DataItems } from '../reducers';
 
 interface ChartProps {
   dataSource: DataItems[];
