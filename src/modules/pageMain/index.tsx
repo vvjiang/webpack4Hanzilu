@@ -5,7 +5,7 @@ import { getDataList, ActionTypeGetDataList } from './actions';
 import Chart from './Chart'
 import Compute from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
-import { PageReduxState } from '../../store/reducers';
+import { PageReduxState } from 'store/reducers';
 import { DataItems } from './reducers';
 
 interface PageMainProps {

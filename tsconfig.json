@@ -13,10 +13,17 @@
       "dom"
     ], // 编译过程中需要引入的库文件的列表。
     "skipLibCheck": true, //忽略所有库中的声明文件（ *.d.ts）的类型检查。
-    "jsx": "react" // 在 .tsx文件里支持JSX
+    "jsx": "react", // 在 .tsx文件里支持JSX
+    // ts下别名的检测
+    "baseUrl": "./src",
+    "paths": {
+      "common/*": ["common/*"],
+      "modules/*": ["modules/*"],
+      "store/*": ["store/*"]
+    }
   },
   "include": [
     "./src/**/*", // 这个表示处理根目录的src目录下所有的.ts和.tsx文件，并不是所有文件
     "./declaration.d.ts"
-  ]
+  ],
 }
