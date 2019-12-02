@@ -21,14 +21,6 @@ export default class Chart extends React.Component<ChartProps, Object> {
 
   myChart: ECharts | undefined
 
-  handleWindowResize = () => {
-    this.myChart.resize()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowResize);
-  }
-
   componentDidUpdate() {
     const { dataSource } = this.props
     if (dataSource.length === 0) {
@@ -81,8 +73,6 @@ export default class Chart extends React.Component<ChartProps, Object> {
   initEcharts() {
     // 基于准备好的dom，初始化echarts实例
     this.myChart = echarts.init(document.getElementById('echart_1') as HTMLCanvasElement);
-
-    window.addEventListener("resize", this.handleWindowResize, false);
   }
 
   render() {
