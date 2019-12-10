@@ -85,6 +85,7 @@
     "redux-promise": "0.6.0",
     "redux-thunk": "2.3.0",
     "superagent": "3.8.2",
+    "typesafe-actions": "^5.1.0",
     "webpack": "4.19.0"
   },
   "theme": {

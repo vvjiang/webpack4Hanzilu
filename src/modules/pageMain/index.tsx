@@ -1,7 +1,7 @@
 import React from 'react';
 import moment, { Moment } from 'moment'
 import { connect } from 'react-redux';
-import { getDataList, ActionTypeGetDataList } from './actions';
+import { getDataList } from './actions';
 import Chart from './Chart'
 import Compute from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
@@ -10,9 +10,8 @@ import { DataItems } from './reducers';
 
 interface PageMainProps {
   dataList: DataItems[],
-  getDataList: ActionTypeGetDataList
+  getDataList: Function
 }
-
 interface PageMainState {
   rangeValue: RangePickerValue,
   fundCode: string

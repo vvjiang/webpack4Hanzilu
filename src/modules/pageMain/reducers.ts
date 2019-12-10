@@ -1,4 +1,4 @@
-import { handleActions } from 'redux-actions';
+import { createReducer } from 'typesafe-actions';
 import * as T from './actionTypes';
 
 
@@ -24,29 +24,23 @@ const initialState: PageMainReduxState = {
   dataList: []
 };
 
-const pageMainReducer = handleActions({
-  [T.GET_DATA_LIST]:
-  {
-    next(state, action: any) {
-      if (!action.payload.data.Data) {
-        return {
-          // ...state, // 此处使用展开操作符存在问题，不明原因，暂时搁置
-          dataList: []
-        }
-      }
+const pageMainReducer = createReducer(initialState, {
+  [T.GET_DATA_LIST]: (state, action: any) => {
+    if (!action.payload.data.Data) {
       return {
-        dataList: action.payload.data.Data.LSJZList.reverse().map((l: returnTypes) => ({
-          netValueDate: l.FSRQ,
-          netValue: l.DWJZ,
-          totalNetValue: l.LJJZ,
-          dayOfGrowth: l.JZZZL
-        }))
+        // ...state, // 此处使用展开操作符存在问题，不明原因，暂时搁置
+        dataList: []
       }
-    },
-    throw(state) {
-      return state;
-    },
+    }
+    return {
+      dataList: action.payload.data.Data.LSJZList.reverse().map((l: returnTypes) => ({
+        netValueDate: l.FSRQ,
+        netValue: l.DWJZ,
+        totalNetValue: l.LJJZ,
+        dayOfGrowth: l.JZZZL
+      }))
+    }
   }
-}, initialState);
+});
 
 export default pageMainReducer;
