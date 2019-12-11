@@ -6,3 +6,10 @@ node_modules/
 
 # 排除单元测试覆盖率结果文件夹
 coverage/
+<<<<<<< HEAD
+=======
+package-lock.json
+
+#排除生成文件
+build/
+>>>>>>> ad2f687035c29f31e26318f634701c8c6a1d75b6

@@ -1,0 +1,13 @@
+
+.item{
+  margin-top: 20px;
+  line-height: 32px;
+}
+.label{
+  width:100px;
+  text-align: left;
+  float: left;
+}
+.content{
+  margin-left: 100px;
+}

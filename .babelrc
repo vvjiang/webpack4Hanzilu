@@ -1,3 +1,11 @@
 {
+<<<<<<< HEAD
   "presets": ["env", "react","stage-0","stage-3"]
+=======
+  "presets": ["env", "react","stage-0","stage-3"],
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-decorators-legacy"
+  ]
+>>>>>>> ad2f687035c29f31e26318f634701c8c6a1d75b6
 }

@@ -1,0 +1,11 @@
+.container{
+  background:#f0f0f0;
+}
+.footer{
+  height: 60px;
+  line-height: 60px;
+  width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
