@@ -4,7 +4,13 @@ import moment from 'moment'
 import ComputeItem from './ComputeItem/index'
 import styles from './index.css'
 import { RangePickerValue } from 'antd/lib/date-picker/interface'
-import { DataItems } from '../reducers'
+
+interface DataItems {
+  netValueDate: string;
+  netValue: string;
+  totalNetValue: string;
+  dayOfGrowth: string;
+}
 
 const { RangePicker } = DatePicker;
 

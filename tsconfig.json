@@ -19,7 +19,7 @@
     "paths": {
       "common/*": ["common/*"],
       "modules/*": ["modules/*"],
-      "store/*": ["store/*"]
+      "services/*": ["services/*"]
     }
   },
   "include": [
