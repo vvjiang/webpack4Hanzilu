@@ -1,4 +1,4 @@
-import { getFundData } from 'services/fundService.js'
+import { getFundData } from 'services/fundService'
 
 export default {
   namespace: 'pageMainModel',
