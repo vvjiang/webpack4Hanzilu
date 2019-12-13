@@ -27,7 +27,12 @@
 - 集成redux中间件redux-logger，跟踪action及其dispatch前后状态的变化
 - 集成Typescript
 
+## v1.0.2 （2019-12-13） ##
+
+集成dva
+
+数据流方案从 react-redux,redux-actions,redux-promise 转变为基于 react-redux,redux-saga的dva
+
 ## v1.0.1 （2019-11-26） ##
 
 集成Typescript
-
