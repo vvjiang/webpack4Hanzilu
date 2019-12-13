@@ -32,7 +32,7 @@ const mapStateToProps = ({ pageMainModel }) => {
  * 首页
  */
 @connect(mapStateToProps)
-class PageMain extends React.Component<IPageMainProps, IPageMainState> {
+export default class PageMain extends React.Component<IPageMainProps, IPageMainState> {
   state = {
     rangeValue: [moment().subtract(3, 'years'), moment()] as RangePickerValue,
     fundCode: '100038'

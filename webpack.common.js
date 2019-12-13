@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', './src/app.js'],
+    main: ['babel-polyfill', './src/app'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
