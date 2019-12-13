@@ -12,13 +12,19 @@ interface DataItems {
   dayOfGrowth: string;
 }
 
+export interface IComputeChangeValue {
+  fundCode?: string;
+  money4Day?: number;
+  rangeValue?: RangePickerValue;
+}
+
 const { RangePicker } = DatePicker;
 
 interface ComputeProps {
   rangeValue: RangePickerValue;
   fundCode: string;
   dataSource: DataItems[];
-  onChange(value: Object): void;
+  onChange(value: IComputeChangeValue): void;
 }
 
 export default class Compute extends React.Component<ComputeProps, Object> {

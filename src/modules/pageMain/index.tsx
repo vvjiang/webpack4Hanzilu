@@ -2,20 +2,39 @@ import React from 'react';
 import moment from 'moment'
 import { connect } from 'dva';
 import Chart from './Chart'
-import Compute from './Compute'
+import Compute, { IComputeChangeValue } from './Compute'
+import { RangePickerValue } from 'antd/lib/date-picker/interface';
+
+interface DataItems {
+  netValueDate: string;
+  netValue: string;
+  totalNetValue: string;
+  dayOfGrowth: string;
+}
+
+interface IPageMainProps {
+  fundDatas: DataItems[],
+  dispatch: any
+}
+
+interface IPageMainState {
+  rangeValue: RangePickerValue,
+  fundCode: string
+}
 
 const mapStateToProps = ({ pageMainModel }) => {
   return {
-    fundDatas: pageMainModel.fundDatas,
+    fundDatas: pageMainModel.fundDatas
   };
 }
 
 /**
  * 首页
  */
-class PageMain extends React.Component {
+@connect(mapStateToProps)
+class PageMain extends React.Component<IPageMainProps, IPageMainState> {
   state = {
-    rangeValue: [moment().subtract(3, 'years'), moment()],
+    rangeValue: [moment().subtract(3, 'years'), moment()] as RangePickerValue,
     fundCode: '100038'
   }
   componentDidMount() {
@@ -34,8 +53,11 @@ class PageMain extends React.Component {
     })
   }
 
-  handleChange = (params) => {
-    this.setState(params, this.getList)
+  handleChange = (params: IComputeChangeValue) => {
+    this.setState({
+      ...this.state,
+      ...params
+    }, this.getList)
   }
 
   render() {
@@ -49,5 +71,3 @@ class PageMain extends React.Component {
     );
   }
 }
-
-export default connect(mapStateToProps)(PageMain)
