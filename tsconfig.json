@@ -4,9 +4,8 @@
     "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
     "outDir": "./dist/", // 重定向输出目录
     "sourceMap": true, // 生成相应的 .map文件
-    "noImplicitAny": true, // 在表达式和声明上有隐含的 any类型时报错。
     "module": "esnext", // 模块引入方式
-    "target": "esnext", // 指定ECMAScript目标版本
+    "target": "es6", // 指定ECMAScript目标版本
     "moduleResolution": "node", // 决定如何处理模块
     "lib": [
       "esnext",
