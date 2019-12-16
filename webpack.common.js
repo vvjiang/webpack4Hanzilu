@@ -26,7 +26,7 @@ module.exports = {
       modules: path.resolve(__dirname, 'src/modules'),
       services: path.resolve(__dirname, 'src/services'),
     },
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -50,8 +50,8 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              "@babel/preset-env",
-              "@babel/preset-react"
+              '@babel/preset-env',
+              '@babel/preset-react'
             ],
             plugins: [
               ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
@@ -65,9 +65,9 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            "@babel/preset-env",
-            "@babel/preset-react",
-            "@babel/preset-typescript"
+            '@babel/preset-env',
+            '@babel/preset-react',
+            '@babel/preset-typescript'
           ],
           plugins: [
             ['import', { libraryName: 'antd', style: 'css' }]

@@ -13,7 +13,7 @@ const RouterConfig = (({ history }) => (
     <Suspense fallback={<Loading />}>
       <Frame>
         <Switch>
-          <Route path="/" >
+          <Route path="/">
             <PageMain />
           </Route>
         </Switch>
