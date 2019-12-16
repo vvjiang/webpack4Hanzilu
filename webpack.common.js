@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
+const { override, fixBabelImports } = require('customize-cra');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsImportPluginFactory = require('ts-import-plugin')
@@ -9,11 +10,20 @@ const pathsToClean = [
   'build',
 ];
 
+const dyImport = fixBabelImports('import', {
+  libraryName: 'antd',
+  libraryDirectory: 'es',
+  style: 'css',
+})
+
+console.warn('哈哈哈哈哈', dyImport)
+
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', './src/app'],
+    main: ['@babel/polyfill', './src/app'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -51,9 +61,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['react', 'env', 'stage-0', 'stage-3'],
+            presets: [
+              "@babel/preset-env",
+              "@babel/preset-react"
+            ],
             plugins: [
-              'transform-decorators-legacy',
               ['import', { libraryName: 'antd', style: 'css' }], // `style: true` 会加载 less 文件
             ],
           },
@@ -61,19 +73,18 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        loader: "awesome-typescript-loader",
+        exclude: /node_modules/,
+        loader: 'babel-loader',
         options: {
-          getCustomTransformers: () => ({
-            before: [tsImportPluginFactory([
-              {
-                libraryName: 'antd',
-                libraryDirectory: 'lib',
-                style: 'css'
-              }
-            ])]
-          }),
-        },
-        exclude: /node_modules/
+          presets: [
+            "@babel/preset-env",
+            "@babel/preset-react",
+            "@babel/preset-typescript"
+          ],
+          plugins: [
+            ['import', { libraryName: 'antd',libraryDirectory: 'es', style: 'css' }]
+          ],
+        }
       }, // 先解析ts和tsx，rule规则从下往上
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
