@@ -1,23 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
-const { override, fixBabelImports } = require('customize-cra');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const tsImportPluginFactory = require('ts-import-plugin')
 
 const pathsToClean = [
   'build',
 ];
-
-const dyImport = fixBabelImports('import', {
-  libraryName: 'antd',
-  libraryDirectory: 'es',
-  style: 'css',
-})
-
-console.warn('哈哈哈哈哈', dyImport)
-
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -82,7 +70,7 @@ module.exports = {
             "@babel/preset-typescript"
           ],
           plugins: [
-            ['import', { libraryName: 'antd',libraryDirectory: 'es', style: 'css' }]
+            ['import', { libraryName: 'antd', style: 'css' }]
           ],
         }
       }, // 先解析ts和tsx，rule规则从下往上
