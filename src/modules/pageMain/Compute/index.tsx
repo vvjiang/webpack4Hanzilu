@@ -4,7 +4,19 @@ import moment from 'moment'
 import ComputeItem from './ComputeItem/index'
 import styles from './index.css'
 import { RangePickerValue } from 'antd/lib/date-picker/interface'
-import { DataItems } from '../reducers'
+
+interface DataItems {
+  netValueDate: string;
+  netValue: string;
+  totalNetValue: string;
+  dayOfGrowth: string;
+}
+
+export interface IComputeChangeValue {
+  fundCode?: string;
+  money4Day?: number;
+  rangeValue?: RangePickerValue;
+}
 
 const { RangePicker } = DatePicker;
 
@@ -12,7 +24,7 @@ interface ComputeProps {
   rangeValue: RangePickerValue;
   fundCode: string;
   dataSource: DataItems[];
-  onChange(value: Object): void;
+  onChange(value: IComputeChangeValue): void;
 }
 
 export default class Compute extends React.Component<ComputeProps, Object> {

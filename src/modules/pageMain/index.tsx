@@ -1,35 +1,38 @@
 import React from 'react';
-import moment, { Moment } from 'moment'
-import { connect } from 'react-redux';
-import { getDataList, ActionTypeGetDataList } from './actions';
+import moment from 'moment'
+import { connect } from 'dva';
 import Chart from './Chart'
-import Compute from './Compute'
+import Compute, { IComputeChangeValue } from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
-import { PageReduxState } from 'store/reducers';
-import { DataItems } from './reducers';
 
-interface PageMainProps {
-  dataList: DataItems[],
-  getDataList: ActionTypeGetDataList
+interface DataItems {
+  netValueDate: string;
+  netValue: string;
+  totalNetValue: string;
+  dayOfGrowth: string;
 }
 
-interface PageMainState {
+interface IPageMainProps {
+  fundDatas: DataItems[],
+  dispatch: any
+}
+
+interface IPageMainState {
   rangeValue: RangePickerValue,
   fundCode: string
 }
 
-const mapStateToProps = (state: PageReduxState) => {
-  const { pageMain } = state
+const mapStateToProps = ({ pageMainModel }) => {
   return {
-    dataList: pageMain.dataList,
+    fundDatas: pageMainModel.fundDatas
   };
 }
 
 /**
  * 首页
  */
-@connect(mapStateToProps, { getDataList })
-export default class PageMain extends React.Component<PageMainProps, PageMainState> {
+@connect(mapStateToProps)
+export default class PageMain extends React.Component<IPageMainProps, IPageMainState> {
   state = {
     rangeValue: [moment().subtract(3, 'years'), moment()] as RangePickerValue,
     fundCode: '100038'
@@ -44,20 +47,26 @@ export default class PageMain extends React.Component<PageMainProps, PageMainSta
     const endDate = rangeValue[1].format('YYYY-MM-DD')
     const pageSize = rangeValue[1].diff(rangeValue[0], 'days')
 
-    this.props.getDataList(fundCode, startDate, endDate, pageSize)
+    this.props.dispatch({
+      type: 'pageMainModel/getDatas',
+      payload: { fundCode, startDate, endDate, pageSize }
+    })
   }
 
-  handleChange = (params: PageMainState) => {
-    this.setState(params, this.getList)
+  handleChange = (params: IComputeChangeValue) => {
+    this.setState({
+      ...this.state,
+      ...params
+    }, this.getList)
   }
 
   render() {
-    const { dataList } = this.props
+    const { fundDatas } = this.props
     const { rangeValue, fundCode } = this.state
     return (
       <div>
-        {dataList.length && <Chart dataSource={dataList} />}
-        <Compute dataSource={dataList} onChange={this.handleChange} rangeValue={rangeValue} fundCode={fundCode} />
+        {fundDatas.length && <Chart dataSource={fundDatas} />}
+        <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} fundCode={fundCode} />
       </div>
     );
   }

@@ -13,7 +13,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', './src/app.js'],
+    main: ['babel-polyfill', './src/app'],
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -26,7 +26,7 @@ module.exports = {
     alias: {
       common: path.resolve(__dirname, 'src/common'),
       modules: path.resolve(__dirname, 'src/modules'),
-      store: path.resolve(__dirname, 'src/store'),
+      services: path.resolve(__dirname, 'src/services'),
     },
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
