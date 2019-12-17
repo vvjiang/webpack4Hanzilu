@@ -4,8 +4,7 @@
 
 使用：
 
-    npm run server // 先开启本地爬虫
-    npm run dev // 再启动本地环境
+    npm run dev:server 
 
 功能：
 

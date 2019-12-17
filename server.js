@@ -37,5 +37,5 @@ app.get('/getList', (rootreq, rootres) => {
 });
 
 app.listen(8011, () => {
-
+  console.log('本地爬虫代理启动成功')
 });

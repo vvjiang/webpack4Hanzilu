@@ -29,6 +29,7 @@
       "semi":[0],
       "import/no-unresolved":[0],
       "import/extensions":[0],
-      "generator-star-spacing":[0]
+      "generator-star-spacing":[0],
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     }
 }

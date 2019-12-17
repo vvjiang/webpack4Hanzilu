@@ -1,11 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const pathsToClean = [
-  'build',
-];
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -39,7 +35,7 @@ module.exports = {
       hash: isProduction,
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', allChunks: false }),
-    new CleanWebpackPlugin(pathsToClean),
+    new CleanWebpackPlugin(),
   ],
   module: {
     rules: [

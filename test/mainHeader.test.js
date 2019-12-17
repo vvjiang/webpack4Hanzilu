@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router } from 'dva/router';
 import Enzyme from './config/Enzyme.config';
 import MainHeader from '../src/modules/pageMain/components/mainHeader';
 
