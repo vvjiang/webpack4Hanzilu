@@ -1,6 +1,6 @@
 {
   "name": "webpack-for-hanzilu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "webpack的使用demo",
   "main": "index.js",
   "author": "韩子卢",
