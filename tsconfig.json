@@ -5,7 +5,7 @@
     "outDir": "./dist/", // 重定向输出目录
     "sourceMap": true, // 生成相应的 .map文件
     "module": "esnext", // 模块引入方式
-    "target": "es6", // 指定ECMAScript目标版本
+    "target": "esnext", // 指定ECMAScript目标版本
     "moduleResolution": "node", // 决定如何处理模块
     "lib": [
       "esnext",
