@@ -30,6 +30,8 @@
 
 使用@babel/preset-typescript去替换awesome-typescript-loader。
 
+相关博客：[使用@babel/preset-typescript取代awesome-typescript-loader和ts-loader](https://www.cnblogs.com/vvjiang/p/12057811.html)
+
 ## v1.0.2 （2019-12-13） ##
 
 集成dva
