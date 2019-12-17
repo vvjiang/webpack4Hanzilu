@@ -18,9 +18,10 @@
 - 集成字体图标库Font Awesome
 - 实现生产配置和开发配置分离
 - 本地开发服务器搭建及热模块替换
-- 各类文件压缩和打包优化
+- 各类文件压缩
+- 各种打包优化
 - 单元测试采用jest,enzyme
-- json-server模拟服务器返回数据（当前项目使用nodejs本地爬虫）
+- json-server模拟服务器返回数据
 - axios进行ajax请求
 - 集成eslint检测和editorconfig配置
 - 集成webpack-bundle-analyzer，实现输出文件体积与交互关系的可视化
