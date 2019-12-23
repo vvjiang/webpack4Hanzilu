@@ -23,10 +23,10 @@ interface IPageMainState {
   fundCode: string
 }
 
-const mapStateToProps = ({ pageMainModel }) => {
+const mapStateToProps = ({ fundModel }) => {
   return {
-    fundDatas: pageMainModel.fundDatas,
-    funds: pageMainModel.funds
+    fundDatas: fundModel.fundDatas,
+    funds: fundModel.funds
   };
 }
 
@@ -47,7 +47,7 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
   // 获取所有基金的信息（包括名字和基金代码）
   getFunds = () => {
     this.props.dispatch({
-      type: 'pageMainModel/getFunds'
+      type: 'fundModel/getFunds'
     })
   }
 
@@ -59,7 +59,7 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     const pageSize = rangeValue[1].diff(rangeValue[0], 'days')
 
     this.props.dispatch({
-      type: 'pageMainModel/getDatas',
+      type: 'fundModel/getDatas',
       payload: { fundCode, startDate, endDate, pageSize }
     })
   }

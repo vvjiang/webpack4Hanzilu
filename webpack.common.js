@@ -21,6 +21,7 @@ module.exports = {
       common: path.resolve(__dirname, 'src/common'),
       modules: path.resolve(__dirname, 'src/modules'),
       services: path.resolve(__dirname, 'src/services'),
+      models: path.resolve(__dirname, 'src/models')
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx']
   },

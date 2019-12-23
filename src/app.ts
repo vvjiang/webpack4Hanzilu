@@ -3,15 +3,18 @@ import dva from 'dva'
 import './app.less';
 
 import routerConfig from './route/index'
-import pageMainModel from 'modules/pageMain/model'
+import fundModel from 'models/fundModel'
 import { createHashHistory } from 'history';
 
 const app = dva({
   history: createHashHistory(),
-  onAction: createLogger
+  onAction: createLogger,
+  onError: (e) => {
+    console.error(`异常：${e.message}`);
+  },
 });
 
-app.model(pageMainModel)
+app.model(fundModel)
 
 app.router(routerConfig)
 
