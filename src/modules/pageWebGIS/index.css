@@ -1,0 +1,17 @@
+.container{
+  margin: 40px 0;
+}
+.title{
+  color: #333;
+  font-size: 18px;
+  line-height: 2;
+  text-align: center;
+}
+.map{
+  width: 500px;
+  height: 500px;
+  margin: 20px auto 0;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+}
