@@ -1,14 +1,42 @@
 {
-  "searchBook": [
-    {
-      "id": "1",
-      "title": "三国演义",
-      "description": "一段三角恋"
-    },
-    {
-      "id": "2",
-      "title": "西游记",
-      "description": "四人行"
+  "getList": {
+    "Data": {
+      "LSJZList": [
+        {
+          "FSRQ": "2019-01-18",
+          "DWJZ": "1.2100",
+          "LJJZ": "1.2100",
+          "JZZZL": "10.00"
+        },
+        {
+          "FSRQ": "2019-01-17",
+          "DWJZ": "1.1000",
+          "LJJZ": "1.1000",
+          "JZZZL": "10.00"
+        },
+        {
+          "FSRQ": "2019-01-16",
+          "DWJZ": "1.0000",
+          "LJJZ": "1.0000",
+          "JZZZL": "10.00"
+        }
+      ]
     }
+  },
+  "getFunds": [
+    [
+      "000001",
+      "HXCZHH",
+      "华夏成长混合",
+      "混合型",
+      "HUAXIACHENGZHANGHUNHE"
+    ],
+    [
+      "100038",
+      "FGHS300ZSZQ",
+      "富国沪深300指数增强",
+      "股票指数",
+      "FUGUOHUSHEN300ZHISHUZENGQIANG"
+    ]
   ]
 }

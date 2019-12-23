@@ -6,4 +6,5 @@
   width: 1024px;
   min-height: calc(100vh - 120px);
   margin: 0 auto;
+  overflow: hidden;
 }

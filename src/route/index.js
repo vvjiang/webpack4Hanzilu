@@ -7,14 +7,18 @@ function Loading() {
 }
 
 const PageMain = React.lazy(() => import('modules/pageMain'));
+const PageWebGIS = React.lazy(() => import('modules/pageWebGIS'));
 
 const RouterConfig = (({ history }) => (
   <Router history={history}>
     <Suspense fallback={<Loading />}>
-      <Frame>
+      <Frame history={history}>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <PageMain />
+          </Route>
+          <Route exact path="/webgis">
+            <PageWebGIS />
           </Route>
         </Switch>
       </Frame>

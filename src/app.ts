@@ -6,10 +6,12 @@ import appModels from './app.model.js'
 import './app.less';
 import routerConfig from './route/index'
 
-
 const app = dva({
   history: createHashHistory(),
-  onAction: createLogger
+  onAction: createLogger,
+  onError: (e) => {
+    console.error(`异常：${e.message}`);
+  },
 });
 
 appModels.forEach((model) => {

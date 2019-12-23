@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment'
+import { Empty } from 'antd'
 import { connect } from 'dva';
+import styles from './index.css'
 import Chart from './Chart'
 import Compute, { IComputeChangeValue } from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
@@ -13,8 +15,9 @@ interface DataItems {
 }
 
 interface IPageMainProps {
-  fundDatas: DataItems[],
-  dispatch: any
+  fundDatas: DataItems[];
+  funds: [string, string, string][];
+  dispatch: any;
 }
 
 interface IPageMainState {
@@ -22,9 +25,10 @@ interface IPageMainState {
   fundCode: string
 }
 
-const mapStateToProps = ({ pageMainModel }) => {
+const mapStateToProps = ({ fundModel }) => {
   return {
-    fundDatas: pageMainModel.fundDatas
+    fundDatas: fundModel.fundDatas,
+    funds: fundModel.funds
   };
 }
 
@@ -38,8 +42,17 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     fundCode: '100038'
   }
   componentDidMount() {
+    this.getFunds()
     this.getList()
   }
+
+  // 获取所有基金的信息（包括名字和基金代码）
+  getFunds = () => {
+    this.props.dispatch({
+      type: 'fundModel/getFunds'
+    })
+  }
+
   // 获取基金数据
   getList = () => {
     const { rangeValue, fundCode } = this.state
@@ -48,7 +61,7 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     const pageSize = rangeValue[1].diff(rangeValue[0], 'days')
 
     this.props.dispatch({
-      type: 'pageMainModel/getDatas',
+      type: 'fundModel/getDatas',
       payload: { fundCode, startDate, endDate, pageSize }
     })
   }
@@ -60,13 +73,23 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     }, this.getList)
   }
 
-  render() {
+  // 渲染图表
+  renderChart = () => {
     const { fundDatas } = this.props
+    if (fundDatas.length === 0) {
+
+      return <Empty className={styles['empty-container']} />
+    }
+    return < Chart dataSource={fundDatas} />
+  }
+
+  render() {
+    const { fundDatas, funds } = this.props
     const { rangeValue, fundCode } = this.state
     return (
-      <div>
-        {fundDatas.length && <Chart dataSource={fundDatas} />}
-        <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} fundCode={fundCode} />
+      <div className={styles['container']}>
+        {this.renderChart()}
+        <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} funds={funds} fundCode={fundCode} />
       </div>
     );
   }

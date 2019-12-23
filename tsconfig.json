@@ -18,7 +18,8 @@
     "paths": {
       "common/*": ["common/*"],
       "modules/*": ["modules/*"],
-      "services/*": ["services/*"]
+      "services/*": ["services/*"],
+      "models/*": ["models/*"]
     }
   },
   "include": [
