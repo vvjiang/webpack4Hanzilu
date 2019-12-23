@@ -24,6 +24,7 @@ interface ComputeProps {
   rangeValue: RangePickerValue;
   fundCode: string;
   dataSource: DataItems[];
+  funds: [string, string, string][];
   onChange(value: IComputeChangeValue): void;
 }
 
@@ -113,13 +114,13 @@ export default class Compute extends React.Component<ComputeProps, Object> {
     return [Number.parseFloat(inputValue.toFixed(2)), Number.parseFloat(finalValue.toFixed(2))]
   }
   render() {
-    const { rangeValue, fundCode, dataSource } = this.props
+    const { rangeValue, fundCode, dataSource, funds } = this.props
     const { money4Day } = this.state
     const finalValue = this.computeResult()
     const inputValue = dataSource.length * money4Day
     const percent = ((finalValue / inputValue - 1) * 100).toFixed(2)
 
-    const fundInfo = window.r.find(l => l[0] == fundCode)
+    const fundInfo = funds.find(l => l[0] == fundCode)
 
     const strategyResult = this.computeStrategyResult()
     const strategyPercent = ((strategyResult[1] / strategyResult[0] - 1) * 100).toFixed(2)

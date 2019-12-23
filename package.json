@@ -60,6 +60,7 @@
   },
   "scripts": {
     "dev:server": "concurrently \"npm run dev\" \"npm run server\"",
+    "dev:mock": "concurrently \"npm run dev\" \"npm run mock\"",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "cross-env NODE_ENV=production webpack -p --config webpack.prod.js",
     "build": "cross-env webpack -p --config webpack.prod.js",

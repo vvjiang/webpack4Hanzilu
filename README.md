@@ -21,7 +21,7 @@
 - 各类文件压缩
 - 各种打包优化
 - 单元测试采用jest,enzyme
-- json-server模拟服务器返回数据
+- 支持本地爬虫代理模拟返回数据，也支持json-server模拟服务器返回数据
 - axios进行ajax请求
 - 集成eslint检测和editorconfig配置
 - 集成webpack-bundle-analyzer，实现输出文件体积与交互关系的可视化

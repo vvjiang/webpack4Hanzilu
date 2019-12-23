@@ -13,8 +13,9 @@ interface DataItems {
 }
 
 interface IPageMainProps {
-  fundDatas: DataItems[],
-  dispatch: any
+  fundDatas: DataItems[];
+  funds:  [string, string, string][];
+  dispatch: any;
 }
 
 interface IPageMainState {
@@ -24,7 +25,8 @@ interface IPageMainState {
 
 const mapStateToProps = ({ pageMainModel }) => {
   return {
-    fundDatas: pageMainModel.fundDatas
+    fundDatas: pageMainModel.fundDatas,
+    funds: pageMainModel.funds
   };
 }
 
@@ -38,8 +40,17 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     fundCode: '100038'
   }
   componentDidMount() {
+    this.getFunds()
     this.getList()
   }
+
+  // 获取所有基金的信息（包括名字和基金代码）
+  getFunds = () => {
+    this.props.dispatch({
+      type: 'pageMainModel/getFunds'
+    })
+  }
+
   // 获取基金数据
   getList = () => {
     const { rangeValue, fundCode } = this.state
@@ -61,12 +72,12 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
   }
 
   render() {
-    const { fundDatas } = this.props
+    const { fundDatas, funds } = this.props
     const { rangeValue, fundCode } = this.state
     return (
       <div>
         {fundDatas.length && <Chart dataSource={fundDatas} />}
-        <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} fundCode={fundCode} />
+        <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} funds={funds} fundCode={fundCode} />
       </div>
     );
   }

@@ -1,9 +1,10 @@
-import { getFundData } from 'services/fundService'
+import { getFundData, getFunds } from 'services/fundService'
 
 export default {
   namespace: 'pageMainModel',
   state: {
-    fundDatas: []
+    fundDatas: [],
+    funds: [] // 所有基金的信息
   },
   effects: {
     *getDatas({ payload }, { call, put }) {
@@ -16,12 +17,22 @@ export default {
       }))
       yield put({ type: 'refreshDatas', payload: fundDatas });
     },
+    *getFunds({ payload }, { call, put }) {
+      const { data } = yield call(getFunds, payload);
+      yield put({ type: 'refreshFunds', payload: data });
+    },
   },
   reducers: {
     refreshDatas(state, { payload }) {
       return {
         ...state,
         fundDatas: payload
+      }
+    },
+    refreshFunds(state, { payload }) {
+      return {
+        ...state,
+        funds: payload
       }
     },
   },
