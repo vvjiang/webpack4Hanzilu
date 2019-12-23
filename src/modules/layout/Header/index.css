@@ -2,11 +2,33 @@
   background:#add8e6;
 }
 .header{
-  height: 60px;
-  line-height: 60px;
+  height: 300px;
+  line-height: 300px;
   width: 1024px;
   margin: 0 auto;
   font-size: 24px;
   font-weight: bold;
   color: #233;
+  text-align: center;
+}
+.nav{
+  background-color: #00BCD4;
+}
+.nav-content{
+  width: 1024px;
+  margin: 0 auto;
+  border-bottom: none;
+  background-color: transparent;
+  color: #fff;
+}
+.nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item){
+  color: #fff;
+  border-bottom: none;
+}
+.nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item-selected),
+.nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item:hover){
+  color: #fff;
+  border-bottom: none;
+  border:none;
+  box-shadow:0 -15px 13px -15px #fff inset;
 }
