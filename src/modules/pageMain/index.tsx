@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment'
+import { Empty } from 'antd'
 import { connect } from 'dva';
+import styles from './index.css'
 import Chart from './Chart'
 import Compute, { IComputeChangeValue } from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
@@ -14,7 +16,7 @@ interface DataItems {
 
 interface IPageMainProps {
   fundDatas: DataItems[];
-  funds:  [string, string, string][];
+  funds: [string, string, string][];
   dispatch: any;
 }
 
@@ -71,12 +73,22 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     }, this.getList)
   }
 
+  // 渲染图表
+  renderChart = () => {
+    const { fundDatas } = this.props
+    if (fundDatas.length === 0) {
+
+      return <Empty className={styles['empty-container']} />
+    }
+    return < Chart dataSource={fundDatas} />
+  }
+
   render() {
     const { fundDatas, funds } = this.props
     const { rangeValue, fundCode } = this.state
     return (
-      <div>
-        {fundDatas.length && <Chart dataSource={fundDatas} />}
+      <div className={styles['container']}>
+        {this.renderChart()}
         <Compute dataSource={fundDatas} onChange={this.handleChange} rangeValue={rangeValue} funds={funds} fundCode={fundCode} />
       </div>
     );
