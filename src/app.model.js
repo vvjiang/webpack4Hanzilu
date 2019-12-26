@@ -1,5 +1,5 @@
-import pageMainModel from 'modules/pageMain/model'
+import fundModel from 'models/fundModel'
 
 export default [
-  pageMainModel
+  fundModel
 ]
