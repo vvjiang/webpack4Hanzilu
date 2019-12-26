@@ -11,8 +11,8 @@ const PageWebGIS = React.lazy(() => import('modules/pageWebGIS'));
 
 const RouterConfig = (({ history }) => (
   <Router history={history}>
-    <Suspense fallback={<Loading />}>
-      <Frame history={history}>
+    <Frame history={history}>
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route exact path="/">
             <PageMain />
@@ -21,8 +21,8 @@ const RouterConfig = (({ history }) => (
             <PageWebGIS />
           </Route>
         </Switch>
-      </Frame>
-    </Suspense>
+      </Suspense>
+    </Frame>
   </Router>
 ));
 
