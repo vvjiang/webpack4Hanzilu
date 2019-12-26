@@ -22,13 +22,16 @@
   color: #fff;
 }
 .nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item){
-  color: #fff;
+  color: #eee;
   border-bottom: none;
+  font-size: 16px;
 }
 .nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item-selected),
 .nav-content:global(.ant-menu-horizontal) > :global(.ant-menu-item:hover){
-  color: #fff;
   border-bottom: none;
-  border:none;
-  box-shadow:0 -15px 13px -15px #fff inset;
+  border: none;
+  box-shadow: 0 -22px 15px -15px #fff inset, 0 22px 15px -15px #fff inset;
+  color: #fff;
+  top: 0;
+  font-weight: bold;
 }
