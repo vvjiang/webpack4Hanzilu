@@ -14,6 +14,7 @@ interface ChartProps {
   dataSource: DataItems[];
 }
 
+// 基金走势曲线图
 export default function FundChart(props: ChartProps) {
   const { dataSource } = props
   const domref = useRef()

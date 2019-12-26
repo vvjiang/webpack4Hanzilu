@@ -3,7 +3,7 @@ import moment from 'moment'
 import { Empty } from 'antd'
 import { connect } from 'dva';
 import styles from './index.css'
-import Chart from './Chart'
+import FundChart from './FundChart'
 import Compute, { IComputeChangeValue } from './Compute'
 import { RangePickerValue } from 'antd/lib/date-picker/interface';
 
@@ -79,7 +79,7 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
     if (fundDatas.length === 0) {
       return <Empty className={styles['empty-container']} />
     }
-    return <Chart dataSource={fundDatas} />
+    return <FundChart dataSource={fundDatas} />
   }
 
   render() {
