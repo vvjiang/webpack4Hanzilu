@@ -77,10 +77,9 @@ export default class PageMain extends React.Component<IPageMainProps, IPageMainS
   renderChart = () => {
     const { fundDatas } = this.props
     if (fundDatas.length === 0) {
-
       return <Empty className={styles['empty-container']} />
     }
-    return < Chart dataSource={fundDatas} />
+    return <Chart dataSource={fundDatas} />
   }
 
   render() {

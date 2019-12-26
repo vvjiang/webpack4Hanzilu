@@ -19,7 +19,8 @@
       "common/*": ["common/*"],
       "modules/*": ["modules/*"],
       "services/*": ["services/*"],
-      "models/*": ["models/*"]
+      "models/*": ["models/*"],
+      "utils/*": ["utils/*"]
     }
   },
   "include": [
