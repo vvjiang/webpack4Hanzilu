@@ -1,5 +1,9 @@
 # webpack4Hanzilu #
 
+已废弃，更换仓库地址为：https://gitee.com/wmvc/webpack4Hanzilu
+
+原文：
+
 一个自用的webpack脚手架
 
 使用：
